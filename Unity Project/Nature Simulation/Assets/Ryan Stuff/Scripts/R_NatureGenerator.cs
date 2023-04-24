@@ -16,6 +16,8 @@ public class R_NatureGenerator : MonoBehaviour
     public List<Element> rocks;
 
     public List<GameObject> SpawnedElements;
+
+    public float SpawnDelay = 0.05f;
     
     private void Start()
     {
@@ -35,11 +37,11 @@ public class R_NatureGenerator : MonoBehaviour
             Destroy(gameObject);
         }
 
-        for (int x = 0; x < natureSize; x += elementSpacing)
+        for (int x = -natureSize/2; x < natureSize/2; x += elementSpacing)
         {
-            for (int z = 0; z < natureSize; z += elementSpacing)
+            for (int z = -natureSize / 2; z < natureSize / 2; z += elementSpacing)
             {
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(SpawnDelay);
                 Element element = null;
                 float totalWeights = emptySpaceWeights + treeWeights + rockWeights;
                 int i = Random.Range(0, (int)totalWeights);
@@ -61,7 +63,7 @@ public class R_NatureGenerator : MonoBehaviour
                 if (element != null)
                 { 
 
-                    Vector3 position = new Vector3(x, transform.position.y, z);
+                    Vector3 position = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
                     Vector3 offset = new Vector3(Random.Range(-element.elementPositionOffset, element.elementPositionOffset), 0, Random.Range(-element.elementPositionOffset, element.elementPositionOffset));
                     Vector3 rotation = new Vector3(Random.Range(0, element.elementRotationOffset), Random.Range(0, 360f), Random.Range(0, element.elementRotationOffset));
                     Vector3 scale = Vector3.one * Random.Range(element.elementScaleOffsetMin, element.elementScaleOffsetMax);
