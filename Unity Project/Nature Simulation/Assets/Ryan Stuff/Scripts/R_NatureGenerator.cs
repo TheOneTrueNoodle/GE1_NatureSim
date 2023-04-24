@@ -53,11 +53,11 @@ public class R_NatureGenerator : MonoBehaviour
                 }
                 else if(i <= treeWeights + emptySpaceWeights)
                 {
-                    element = trees[Random.Range(0, trees.Count)];
+                    element = RandomElement(trees);
                 }
                 else if(i <= rockWeights + treeWeights + emptySpaceWeights)
                 {
-                    element = rocks[Random.Range(0, rocks.Count)];
+                    element = RandomElement(rocks);
                 }
 
                 if (element != null)
@@ -91,6 +91,42 @@ public class R_NatureGenerator : MonoBehaviour
             }
         }
     }
+
+    private Element RandomElement(List<Element> Elements)
+    {
+        int totalWeight = 0;
+        List<int> ElementWeights = new List<int>();
+        foreach(Element element in Elements)
+        {
+            totalWeight += element.ElementSpawnWeight;
+            ElementWeights.Add(element.ElementSpawnWeight);
+        }
+
+        int roll = Random.Range(1, totalWeight);
+
+        for(int i = 0; i < Elements.Count; i++)
+        {
+            int WeightCheck = 0;
+            for(int j = 0; j < i; j++)
+            {
+                WeightCheck += ElementWeights[j];
+            }
+
+            if (i != 0)
+            {
+                if (roll > ElementWeights[i - 1] && roll < WeightCheck)
+                {
+                    return Elements[i];
+                }
+            }
+            else if (roll < WeightCheck)
+            {
+                return Elements[i];
+            }
+        }
+
+        return null;
+    }
 }
 
 [System.Serializable]
@@ -103,4 +139,6 @@ public class Element
     public float elementRotationOffset = 5f;
     public float elementScaleOffsetMax = 1f;
     public float elementScaleOffsetMin = 0.5f;
+
+    public int ElementSpawnWeight = 1f;
 }

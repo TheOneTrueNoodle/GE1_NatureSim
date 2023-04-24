@@ -298,12 +298,14 @@ MonoBehaviour:
     elementRotationOffset: 5
     elementScaleOffsetMax: 1.25
     elementScaleOffsetMin: 0.5
+    ElementSpawnWeight: 3
   - name: Test Fruit Tree
     prefab: {fileID: 780671122100451133, guid: fe695714594ff3f409edfb697e76103a, type: 3}
     elementPositionOffset: 0.2
     elementRotationOffset: 2
     elementScaleOffsetMax: 1.25
     elementScaleOffsetMin: 0.85
+    ElementSpawnWeight: 1
   rocks:
   - name: Test Rock
     prefab: {fileID: 6857363697955395826, guid: 93a3d3d988ebb5e4599ff62f0074c316, type: 3}
@@ -311,6 +313,7 @@ MonoBehaviour:
     elementRotationOffset: 5
     elementScaleOffsetMax: 1.25
     elementScaleOffsetMin: 0.5
+    ElementSpawnWeight: 1
   SpawnedElements: []
   SpawnDelay: 0.005
 --- !u!1 &474829250
