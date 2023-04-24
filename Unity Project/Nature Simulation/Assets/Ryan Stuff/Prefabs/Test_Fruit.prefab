@@ -255,12 +255,12 @@ Transform:
   m_GameObject: {fileID: 4459153557537905465}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.7134905, y: 5.7459745, z: 2.7129862}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4459153557176444518}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4459153557537905471
 MonoBehaviour:
@@ -274,7 +274,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14f189f605877194e9a8681f238544a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  element:
+    name: Fruit Tree
+    prefab: {fileID: 0}
+    elementPositionOffset: 1
+    elementRotationOffset: 5
+    elementScaleOffsetMax: 1
+    elementScaleOffsetMin: 0.5
+    ElementSpawnWeight: 1
+  Grows: 1
+  Dies: 1
+  MaxLifetime: 90
+  MinLifetime: 30
   GrowSpeed: 1
+  ChanceForNewElement: 5
+  scale: {x: 1, y: 1, z: 1}
+  Grown: 0
 --- !u!54 &5670337546867176700
 Rigidbody:
   m_ObjectHideFlags: 0

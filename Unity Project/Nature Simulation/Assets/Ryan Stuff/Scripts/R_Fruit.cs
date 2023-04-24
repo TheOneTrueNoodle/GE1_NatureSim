@@ -2,32 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class R_Fruit : MonoBehaviour
+public class R_Fruit : R_ElementClass
 {
-    public float  GrowSpeed = 1;
+    [Space(10)]
+    [Header("Other Variables")]
     private Rigidbody rb;
 
-    private void Start()
+    new private void Start()
     {
+        base.Start();
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
-        Grow();
+        StartCoroutine(enableGravity());
     }
 
-    public void Grow()
+    IEnumerator enableGravity()
     {
-        StartCoroutine(Growing());
-    }
-
-    IEnumerator Growing()
-    {
-        var t = 0f;
-        while (t < 1f)
+        while(base.Grown != true)
         {
-            t += GrowSpeed * Time.deltaTime;
-            transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, t);
             yield return null;
         }
+
         rb.useGravity = true;
     }
 }

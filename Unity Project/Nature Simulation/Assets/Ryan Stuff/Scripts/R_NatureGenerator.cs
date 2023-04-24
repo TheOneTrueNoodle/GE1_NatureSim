@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class R_NatureGenerator : MonoBehaviour
 {
+    [HideInInspector] public static R_NatureGenerator Instance;
+
     public int natureSize = 25;
     public int elementSpacing = 3;
     public LayerMask GroundLayerMask;
@@ -18,7 +20,19 @@ public class R_NatureGenerator : MonoBehaviour
     public List<GameObject> SpawnedElements;
 
     public float SpawnDelay = 0.05f;
-    
+
+    private void Awake()
+    {
+        if(Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
     private void Start()
     {
         Generate();
@@ -72,6 +86,7 @@ public class R_NatureGenerator : MonoBehaviour
 
                     GameObject newElement = Instantiate(element.prefab);
                     newElement.transform.SetParent(transform);
+                    newElement.GetComponent<R_ElementClass>().scale = scale;
                     newElement.transform.position = position + offset;
                     newElement.transform.eulerAngles = rotation;
                     newElement.transform.localScale = scale;
@@ -131,18 +146,4 @@ public class R_NatureGenerator : MonoBehaviour
 
         return null;
     }
-}
-
-[System.Serializable]
-public class Element
-{
-    public string name;
-    public GameObject prefab;
-
-    public float elementPositionOffset = 1;
-    public float elementRotationOffset = 5f;
-    public float elementScaleOffsetMax = 1f;
-    public float elementScaleOffsetMin = 0.5f;
-
-    public int ElementSpawnWeight = 1;
 }

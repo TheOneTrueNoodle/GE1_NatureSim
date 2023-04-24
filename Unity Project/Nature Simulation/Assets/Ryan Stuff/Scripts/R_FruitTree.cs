@@ -2,21 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class R_FruitTree : MonoBehaviour
+public class R_FruitTree : R_ElementClass
 {
-    [Header("Possible Spawn Positions")]
+    [Space(10)]
+    [Header("Possible Fruit Spawn Positions")]
     public List<GameObject> FruitSpawnPositions;
 
     [Header("Fruit Spawn Time Range")]
-    public float MaxTime;
-    public float MinTime;
+    public float MaxTime = 240;
+    public float MinTime = 90;
 
     [Header("Fruit Variables")]
     public GameObject FruitPrefab;
     [Range(1, 6)] public int MaxFruitsSpawned = 1;
 
-    private void Start()
+    new private void Start()
     {
+        base.Start();
         StartCoroutine(SpawnFruit());
     }
 

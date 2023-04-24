@@ -8231,7 +8231,7 @@ Transform:
   - {fileID: 780671122466858624}
   - {fileID: 780671121632353651}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &780671122100451107
 MonoBehaviour:
@@ -8245,6 +8245,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfbbc1c7ca5d1b047a1e2785edb6ced4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  element:
+    name: Fruit Tree
+    prefab: {fileID: 780671122100451133}
+    elementPositionOffset: 1
+    elementRotationOffset: 5
+    elementScaleOffsetMax: 1
+    elementScaleOffsetMin: 0.5
+    ElementSpawnWeight: 1
+  Grows: 1
+  Dies: 1
+  MaxLifetime: 240
+  MinLifetime: 120
+  GrowSpeed: 1
+  ChanceForNewElement: 25
+  scale: {x: 1, y: 1, z: 1}
+  Grown: 0
   FruitSpawnPositions:
   - {fileID: 780671120954322201}
   - {fileID: 780671121388541160}
@@ -8252,7 +8268,7 @@ MonoBehaviour:
   - {fileID: 780671121952161813}
   - {fileID: 780671122466858625}
   - {fileID: 780671121632353612}
-  MaxTime: 90
+  MaxTime: 60
   MinTime: 15
   FruitPrefab: {fileID: 4459153557537905465, guid: 367b0137980321445b54088be20f3b01, type: 3}
   MaxFruitsSpawned: 4
