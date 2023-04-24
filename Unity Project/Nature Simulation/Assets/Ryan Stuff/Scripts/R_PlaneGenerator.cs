@@ -15,10 +15,10 @@ public class R_PlaneGenerator : MonoBehaviour
     public int zSize = 20;
 
     [Header("Terrain Settings")]
-    [Range(0,1)] public float amplitude = 1f;
-    [Range(0, 1)] public float frequency = 1f;
-    [Range(0, 1)] public float normalization = 0;
-    [Range(0, 1)] public float total = 0;
+    [Range(0,10)] public float amplitude = 1f;
+    [Range(0, 10)] public float frequency = 1f;
+    [Range(0, 10)] public float normalization = 0;
+    [Range(0, 10)] public float total = 0;
 
     private void Awake()
     {

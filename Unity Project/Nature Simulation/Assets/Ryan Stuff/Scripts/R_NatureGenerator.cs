@@ -24,11 +24,12 @@ public class R_NatureGenerator : MonoBehaviour
 
     public void Generate()
     {
-        SpawnElements();
+        StartCoroutine(SpawnElements());
     }
 
-    public void SpawnElements()
+    private IEnumerator SpawnElements()
     {
+       
         foreach(GameObject gameObject in SpawnedElements)
         {
             Destroy(gameObject);
@@ -38,6 +39,7 @@ public class R_NatureGenerator : MonoBehaviour
         {
             for (int z = 0; z < natureSize; z += elementSpacing)
             {
+                yield return new WaitForSeconds(0.05f);
                 Element element = null;
                 float totalWeights = emptySpaceWeights + treeWeights + rockWeights;
                 int i = Random.Range(0, (int)totalWeights);
@@ -72,8 +74,15 @@ public class R_NatureGenerator : MonoBehaviour
                     newElement.transform.eulerAngles = rotation;
                     newElement.transform.localScale = scale;
 
-                    //if (Physics.Raycast(newElement.transform.position, Vector3.up, out RaycastHit hit, 1<<6)) { newElement.transform.position = new Vector3(newElement.transform.position.x, hit.point.y, newElement.transform.position.z); }
-                    //else { newElement.transform.position = new Vector3(newElement.transform.position.x, 0, newElement.transform.position.z); }
+                    if (Physics.Raycast(newElement.transform.position + new Vector3 (0,50,0), Vector3.down, out RaycastHit hit, GroundLayerMask)) 
+                    {
+                        Debug.Log(hit.transform.gameObject);
+                        newElement.transform.position = new Vector3(newElement.transform.position.x, hit.point.y, newElement.transform.position.z); 
+                    }
+                    else
+                    {
+                        newElement.transform.position = new Vector3(newElement.transform.position.x, 0, newElement.transform.position.z); 
+                    }
 
                     SpawnedElements.Add(newElement);
                 }
