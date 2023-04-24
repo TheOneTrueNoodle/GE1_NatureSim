@@ -20,61 +20,55 @@ public class R_ElementClass : MonoBehaviour
     [Header("Element Death Variables")]
     [Range(0, 100)] public int ChanceForNewElement = 5;
 
+    //State Machien Stuff
+    R_ElementBaseState currentState;
+    [HideInInspector] public R_ElementGrowingState growingState = new R_ElementGrowingState();
+    [HideInInspector] public R_ElementLivingState livingState = new R_ElementLivingState();
+    [HideInInspector] public R_ElementDyingState dyingState = new R_ElementDyingState();
+    [HideInInspector] public R_ElementNullState nullState = new R_ElementNullState();
+
     //Private Variables
     [HideInInspector] public Vector3 scale = Vector3.one;
     [HideInInspector] public bool Grown = false;
 
+
     //FUNCTIONS
     public void Start()
     {
-        gameObject.name = element.name;
-        Debug.Log("Start Gets Called");
-        if (Grows == true) { StartCoroutine(Growing()); }
-        else if (Dies == true) { StartCoroutine(Lifetime()); }
+        if (Grows == true)
+        {
+            currentState = growingState;
+            currentState.EnterState(this);
+        }
+        else
+        {
+            currentState = livingState;
+            currentState.EnterState(this);
+        }
+        gameObject.name = element.name; 
     }
 
-    IEnumerator Growing()
+    private void Update()
     {
-        var t = 0f;
-        while (t < 1f)
-        {
-            t += GrowSpeed * Time.deltaTime;
-            transform.localScale = Vector3.Lerp(Vector3.zero, scale, t);
-            yield return null;
-        }
-        Grown = true;
-
-        if (Dies == true) { StartCoroutine(Lifetime()); }
+        currentState.UpdateState(this);
     }
 
-    IEnumerator Lifetime()
+    public void SwitchState(R_ElementBaseState state)
     {
-        float time = Random.Range(MinLifetime, MaxLifetime);
-        yield return new WaitForSeconds(time);
-        StartCoroutine(Die());
+        currentState = state;
+        if (state == null)
+        {
+            currentState = nullState;
+        }
+        currentState.EnterState(this);
     }
 
-    IEnumerator Die()
+    public void destroy()
     {
-        var t = 0f;
-        while (t < 1f)
-        {
-            t += GrowSpeed * Time.deltaTime;
-            transform.localScale = Vector3.Lerp(scale, Vector3.zero, t);
-            yield return null;
-        }
-
-        int newTree = Random.Range(1, 100);
-        Debug.Log(newTree);
-        if (newTree < ChanceForNewElement)
-        {
-            yield return StartCoroutine(SpawnNewElement(transform.position));
-        }
-
         Destroy(gameObject);
     }
 
-    IEnumerator SpawnNewElement(Vector3 spawnOrigin)
+    public void SpawnNewElement(Vector3 spawnOrigin)
     {
         Debug.Log("Spawn New Element");
         Vector3 position = new Vector3(spawnOrigin.x, spawnOrigin.y, spawnOrigin.z);
@@ -83,8 +77,7 @@ public class R_ElementClass : MonoBehaviour
         Vector3 scale = Vector3.one * Random.Range(element.elementScaleOffsetMin, element.elementScaleOffsetMax);
 
         GameObject newElement = Instantiate(element.prefab);
-        Debug.Log(newElement);
-        //newElement.transform.SetParent(R_NatureGenerator.Instance.transform);
+        if (R_NatureGenerator.Instance != null) { newElement.transform.SetParent(R_NatureGenerator.Instance.transform); }
         newElement.GetComponent<R_ElementClass>().scale = scale;
         newElement.transform.position = position + offset;
         newElement.transform.eulerAngles = rotation;
@@ -99,9 +92,8 @@ public class R_ElementClass : MonoBehaviour
         {
             newElement.transform.position = new Vector3(newElement.transform.position.x, 0, newElement.transform.position.z);
         }
-
-        //R_NatureGenerator.Instance.SpawnedElements.Add(newElement);
-        yield return null;
+        if (R_NatureGenerator.Instance != null) { R_NatureGenerator.Instance.SpawnedElements.Add(newElement); }
+        Destroy(gameObject);
     }
 }
 

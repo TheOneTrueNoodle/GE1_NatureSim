@@ -397,6 +397,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1564091978595058868}
+  - component: {fileID: 570196546}
   m_Layer: 0
   m_Name: Test_Tree
   m_TagString: Untagged
@@ -433,8 +434,36 @@ Transform:
   - {fileID: 1564091979561606343}
   - {fileID: 1564091979089832713}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &570196546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564091978595058869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7418dcd5a641c941b65f03bf94c2d55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  element:
+    name: Test Tree
+    prefab: {fileID: 1564091978595058869}
+    elementPositionOffset: 1
+    elementRotationOffset: 5
+    elementScaleOffsetMax: 1
+    elementScaleOffsetMin: 0.5
+    ElementSpawnWeight: 1
+  Grows: 1
+  Dies: 1
+  MaxLifetime: 210
+  MinLifetime: 90
+  GrowSpeed: 0.5
+  ChanceForNewElement: 50
+  scale: {x: 1, y: 1, z: 1}
+  Grown: 0
 --- !u!1 &1564091978650781860
 GameObject:
   m_ObjectHideFlags: 0

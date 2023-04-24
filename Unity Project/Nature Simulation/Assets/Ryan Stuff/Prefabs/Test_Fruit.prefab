@@ -275,8 +275,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   element:
-    name: Fruit Tree
-    prefab: {fileID: 0}
+    name: Fruit
+    prefab: {fileID: 780671122100451133, guid: fe695714594ff3f409edfb697e76103a, type: 3}
     elementPositionOffset: 1
     elementRotationOffset: 5
     elementScaleOffsetMax: 1
@@ -284,10 +284,10 @@ MonoBehaviour:
     ElementSpawnWeight: 1
   Grows: 1
   Dies: 1
-  MaxLifetime: 90
+  MaxLifetime: 60
   MinLifetime: 30
   GrowSpeed: 1
-  ChanceForNewElement: 5
+  ChanceForNewElement: 25
   scale: {x: 1, y: 1, z: 1}
   Grown: 0
 --- !u!54 &5670337546867176700

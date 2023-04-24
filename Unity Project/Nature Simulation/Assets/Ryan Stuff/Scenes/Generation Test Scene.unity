@@ -201,7 +201,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 186788446}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -35, y: 0, z: -35}
+  m_LocalPosition: {x: -100, y: 0, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -220,12 +220,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c294f990751fe8e408f548ca30b60235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSize: 70
-  zSize: 70
-  amplitude: 10
-  frequency: 0.06
-  normalization: 0
-  total: 0
+  xSize: 200
+  zSize: 200
+  amplitude: 27.1
+  frequency: 21.6
 --- !u!65 &186788452
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -283,8 +281,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0be566ff4f8714140b9f3acba1a749f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  natureSize: 30
-  elementSpacing: 3
+  natureSize: 100
+  elementSpacing: 5
   GroundLayerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -315,7 +313,7 @@ MonoBehaviour:
     elementScaleOffsetMin: 0.5
     ElementSpawnWeight: 1
   SpawnedElements: []
-  SpawnDelay: 0.005
+  SpawnDelay: 0.0001
 --- !u!1 &474829250
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,85 +910,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1001 &1892235392
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 2
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 780671122100451107, guid: fe695714594ff3f409edfb697e76103a, type: 3}
-      propertyPath: element.name
-      value: Test Fruit Tree
-      objectReference: {fileID: 0}
-    - target: {fileID: 780671122100451107, guid: fe695714594ff3f409edfb697e76103a, type: 3}
-      propertyPath: element.elementPositionOffset
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 780671122100451107, guid: fe695714594ff3f409edfb697e76103a, type: 3}
-      propertyPath: element.elementRotationOffset
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 780671122100451107, guid: fe695714594ff3f409edfb697e76103a, type: 3}
-      propertyPath: element.elementScaleOffsetMax
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 780671122100451107, guid: fe695714594ff3f409edfb697e76103a, type: 3}
-      propertyPath: element.elementScaleOffsetMin
-      value: 0.85
-      objectReference: {fileID: 0}
-    - target: {fileID: 780671122100451132, guid: fe695714594ff3f409edfb697e76103a, type: 3}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 780671122100451132, guid: fe695714594ff3f409edfb697e76103a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 780671122100451132, guid: fe695714594ff3f409edfb697e76103a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 780671122100451132, guid: fe695714594ff3f409edfb697e76103a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 780671122100451132, guid: fe695714594ff3f409edfb697e76103a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 780671122100451132, guid: fe695714594ff3f409edfb697e76103a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 780671122100451132, guid: fe695714594ff3f409edfb697e76103a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 780671122100451132, guid: fe695714594ff3f409edfb697e76103a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 780671122100451132, guid: fe695714594ff3f409edfb697e76103a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 780671122100451132, guid: fe695714594ff3f409edfb697e76103a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 780671122100451132, guid: fe695714594ff3f409edfb697e76103a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 780671122100451133, guid: fe695714594ff3f409edfb697e76103a, type: 3}
-      propertyPath: m_Name
-      value: Test_Fruit_Tree
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_AddedGameObjects: []
-  m_SourcePrefab: {fileID: 100100000, guid: fe695714594ff3f409edfb697e76103a, type: 3}
 --- !u!1 &2027688176
 GameObject:
   m_ObjectHideFlags: 0

@@ -92,8 +92,7 @@ public class R_NatureGenerator : MonoBehaviour
                     newElement.transform.localScale = scale;
 
                     if (Physics.Raycast(newElement.transform.position + new Vector3 (0,50,0), Vector3.down, out RaycastHit hit, Mathf.Infinity, GroundLayerMask)) 
-                    {
-                        Debug.Log(hit.transform.gameObject);
+                    { 
                         newElement.transform.position = new Vector3(newElement.transform.position.x, hit.point.y, newElement.transform.position.z); 
                     }
                     else
@@ -120,8 +119,6 @@ public class R_NatureGenerator : MonoBehaviour
         Debug.Log(totalWeight);
 
         int roll = Random.Range(0, totalWeight + 1);
-
-        Debug.Log("You rolled a " + roll);
 
         for(int i = 0; i < Elements.Count; i++)
         {

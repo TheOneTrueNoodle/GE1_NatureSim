@@ -15,10 +15,8 @@ public class R_PlaneGenerator : MonoBehaviour
     public int zSize = 20;
 
     [Header("Terrain Settings")]
-    [Range(0,10)] public float amplitude = 1f;
-    [Range(0, 10)] public float frequency = 1f;
-    [Range(0, 10)] public float normalization = 0;
-    [Range(0, 10)] public float total = 0;
+    [Range(0, 100)] public float amplitude = 1f;
+    [Range(0, 100)] public float frequency = 1f;
 
     private void Awake()
     {
@@ -36,7 +34,7 @@ public class R_PlaneGenerator : MonoBehaviour
         {
             for (int x = 0; x <= xSize; x++)
             {
-                float y = Mathf.PerlinNoise(x * frequency, z * frequency) * 0.5f;
+                float y = Mathf.PerlinNoise(x / frequency, z / frequency) * 0.5f;
                 y *= amplitude;
 
                 vertices[i] = new Vector3(x, y, z);
