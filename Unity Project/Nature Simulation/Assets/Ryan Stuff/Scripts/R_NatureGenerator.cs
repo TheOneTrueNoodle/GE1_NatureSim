@@ -57,9 +57,9 @@ public class R_NatureGenerator : MonoBehaviour
                 }
 
                 if (element != null)
-                {
+                { 
 
-                    Vector3 position = new Vector3(x, transform.position.y + 10, z);
+                    Vector3 position = new Vector3(x, transform.position.y, z);
                     Vector3 offset = new Vector3(Random.Range(-element.elementPositionOffset, element.elementPositionOffset), 0, Random.Range(-element.elementPositionOffset, element.elementPositionOffset));
                     Vector3 rotation = new Vector3(Random.Range(0, element.elementRotationOffset), Random.Range(0, 360f), Random.Range(0, element.elementRotationOffset));
                     Vector3 scale = Vector3.one * Random.Range(element.elementScaleOffsetMin, element.elementScaleOffsetMax);
@@ -70,9 +70,11 @@ public class R_NatureGenerator : MonoBehaviour
                     newElement.transform.SetParent(transform);
                     newElement.transform.position = position + offset;
                     newElement.transform.eulerAngles = rotation;
-                    newElement.transform.localScale = scale; 
-                    if (Physics.Raycast(position, -Vector3.up, out RaycastHit hit, GroundLayerMask)) { newElement.transform.position = new Vector3(newElement.transform.position.x, hit.point.y, newElement.transform.position.z); }
-                    else { newElement.transform.position = new Vector3(newElement.transform.position.x, 0, newElement.transform.position.z); }
+                    newElement.transform.localScale = scale;
+
+                    //if (Physics.Raycast(newElement.transform.position, Vector3.up, out RaycastHit hit, 1<<6)) { newElement.transform.position = new Vector3(newElement.transform.position.x, hit.point.y, newElement.transform.position.z); }
+                    //else { newElement.transform.position = new Vector3(newElement.transform.position.x, 0, newElement.transform.position.z); }
+
                     SpawnedElements.Add(newElement);
                 }
             }

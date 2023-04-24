@@ -6,6 +6,7 @@ using UnityEngine;
 public class R_PlaneGenerator : MonoBehaviour
 {
     Mesh mesh;
+    new MeshCollider collider;
 
     Vector3[] vertices;
     int[] triangles;
@@ -25,8 +26,6 @@ public class R_PlaneGenerator : MonoBehaviour
         GetComponent<MeshFilter>().mesh = mesh;
         CreateShape();
         UpdateMesh();
-        MeshCollider collider = gameObject.AddComponent<MeshCollider>();
-        collider.sharedMesh = mesh;
     }
 
     private void CreateShape()
@@ -72,6 +71,9 @@ public class R_PlaneGenerator : MonoBehaviour
 
         mesh.vertices = vertices;
         mesh.triangles = triangles;
+
+        collider = gameObject.AddComponent<MeshCollider>();
+        collider.sharedMesh = mesh;
 
         mesh.RecalculateNormals();
     }
