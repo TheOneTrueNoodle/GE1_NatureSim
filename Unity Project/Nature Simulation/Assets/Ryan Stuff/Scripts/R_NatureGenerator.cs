@@ -102,19 +102,23 @@ public class R_NatureGenerator : MonoBehaviour
             ElementWeights.Add(element.ElementSpawnWeight);
         }
 
-        int roll = Random.Range(1, totalWeight);
+        Debug.Log(totalWeight);
+
+        int roll = Random.Range(0, totalWeight + 1);
+
+        Debug.Log("You rolled a " + roll);
 
         for(int i = 0; i < Elements.Count; i++)
         {
             int WeightCheck = 0;
-            for(int j = 0; j < i; j++)
+            for(int j = 0; j <= i; j++)
             {
                 WeightCheck += ElementWeights[j];
             }
 
             if (i != 0)
             {
-                if (roll > ElementWeights[i - 1] && roll < WeightCheck)
+                if (roll > ElementWeights[i - 1] && roll <= WeightCheck)
                 {
                     return Elements[i];
                 }
@@ -140,5 +144,5 @@ public class Element
     public float elementScaleOffsetMax = 1f;
     public float elementScaleOffsetMin = 0.5f;
 
-    public int ElementSpawnWeight = 1f;
+    public int ElementSpawnWeight = 1;
 }
