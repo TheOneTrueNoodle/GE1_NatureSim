@@ -89,10 +89,11 @@ public class R_EndlessTerrain : MonoBehaviour
 
     public class TerrainChunk
     {
-        GameObject meshObject;
+        public GameObject meshObject;
         Vector2 position;
         Bounds bounds;
 
+        public Mesh mesh;
         MeshRenderer meshRenderer;
         MeshFilter meshFilter;
         MeshCollider meshCollider;
@@ -179,6 +180,7 @@ public class R_EndlessTerrain : MonoBehaviour
                     {
                         previousLODIndex = lodIndex;
                         meshFilter.mesh = lodMesh.mesh;
+                        this.mesh = lodMesh.mesh;
                     }
                     else if(!lodMesh.hasRequestedMesh)
                     {
