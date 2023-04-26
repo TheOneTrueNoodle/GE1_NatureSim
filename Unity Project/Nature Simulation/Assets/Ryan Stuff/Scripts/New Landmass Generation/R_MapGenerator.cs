@@ -6,8 +6,10 @@ using System.Threading;
 
 public class R_MapGenerator : MonoBehaviour
 {
-    public enum DrawMode { NoiseMap, ColorMap, Mesh};
+    public enum DrawMode { NoiseMap, ColorMap, Mesh, FalloffMap};
     public DrawMode drawMode;
+
+    public R_LandmassNoise.NormalizeMode normalizeMode;
 
     [Header("Map Settings")]
     public const int mapChunkSize = 241;
@@ -21,6 +23,8 @@ public class R_MapGenerator : MonoBehaviour
     public int seed;
     public Vector2 offset;
 
+    public bool useFallOff;
+
     public float meshHeightMultiplier;
     public AnimationCurve meshHeightCurve;
 
@@ -29,8 +33,15 @@ public class R_MapGenerator : MonoBehaviour
     [Header("Regions")]
     public TerrainType[] regions;
 
+    private float[,] falloffMap;
+
     private Queue<MapThreadInfo<MapData>> mapDataThreadInfoQueue = new Queue<MapThreadInfo<MapData>>();
     private Queue<MapThreadInfo<MeshData>> meshDataThreadInfoQueue = new Queue<MapThreadInfo<MeshData>>();
+
+    private void Awake()
+    {
+        falloffMap = R_FalloffGenerator.GenerateFalloffMap(mapChunkSize);
+    }
 
     public void DrawMapInEditor()
     {
@@ -39,6 +50,7 @@ public class R_MapGenerator : MonoBehaviour
         if (drawMode == DrawMode.NoiseMap) { display.DrawTexture(R_TextureGenerator.TextureFromheightMap(mapData.heightMap)); }
         else if (drawMode == DrawMode.ColorMap) { display.DrawTexture(R_TextureGenerator.TextureFromColorMap(mapData.colorMap, mapChunkSize, mapChunkSize)); }
         else if (drawMode == DrawMode.Mesh) { display.DrawMesh(R_MeshGenerator.GenerateTerrainMesh(mapData.heightMap, meshHeightMultiplier, meshHeightCurve, editorPreviewLOD), R_TextureGenerator.TextureFromColorMap(mapData.colorMap, mapChunkSize, mapChunkSize)); }
+        else if (drawMode == DrawMode.FalloffMap) { display.DrawTexture(R_TextureGenerator.TextureFromheightMap(R_FalloffGenerator.GenerateFalloffMap(mapChunkSize))); }
     }
 
     public void RequestMapData(Vector2 center, Action<MapData> callback)
@@ -99,19 +111,26 @@ public class R_MapGenerator : MonoBehaviour
 
     private MapData GenerateMapData(Vector2 center)
     {
-        float[,] noiseMap = R_LandmassNoise.GenerateNoiseMap(mapChunkSize, mapChunkSize, seed, noiseScale, octaves, persistance, lacunarity, center + offset);
+        float[,] noiseMap = R_LandmassNoise.GenerateNoiseMap(mapChunkSize, mapChunkSize, seed, noiseScale, octaves, persistance, lacunarity, center + offset, normalizeMode);
         Color[] colorMap = new Color[mapChunkSize * mapChunkSize];
 
         for (int y = 0; y < mapChunkSize; y++)
         {
             for (int x = 0; x < mapChunkSize; x++)
             {
+                if(useFallOff)
+                {
+                    noiseMap[x, y] = Mathf.Clamp(noiseMap[x, y] - falloffMap[x, y], 0, 2);
+                }
                 float currentHeight = noiseMap[x, y];
                 for(int i = 0; i < regions.Length; i++)
                 {
-                    if(currentHeight <= regions[i].height)
+                    if(currentHeight >= regions[i].height)
                     {
                         colorMap[y * mapChunkSize + x] = regions[i].color;
+                    }
+                    else
+                    {
                         break;
                     }
                 }
@@ -124,6 +143,8 @@ public class R_MapGenerator : MonoBehaviour
     {
         if(lacunarity < 1) { lacunarity = 1; }
         if(octaves < 0) { octaves = 1; }
+
+        falloffMap = R_FalloffGenerator.GenerateFalloffMap(mapChunkSize);
     }
 
     struct MapThreadInfo<T>
