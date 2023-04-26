@@ -21,6 +21,8 @@ public class R_NatureGenerator : MonoBehaviour
 
     public float SpawnDelay = 0.05f;
 
+    private float GenerateTimer = 2f;
+
     private void Awake()
     {
         if(Instance != null && Instance != this)
@@ -33,15 +35,25 @@ public class R_NatureGenerator : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Update()
     {
-        Generate();
+        if(GenerateTimer > 0)
+        {
+            GenerateTimer -= Time.deltaTime;
+            if(GenerateTimer <= 0)
+            {
+                Generate();
+            }
+        }
+
     }
 
     public void Generate()
     {
         StartCoroutine(SpawnElements());
     }
+
+
 
     private IEnumerator SpawnElements()
     {
@@ -60,24 +72,44 @@ public class R_NatureGenerator : MonoBehaviour
                 float totalWeights = emptySpaceWeights + treeWeights + rockWeights;
                 int i = Random.Range(0, (int)totalWeights);
 
+                Vector3 position = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
+                float heightValue = 0;
+                bool canSpawn = false;
 
-                if(i <= emptySpaceWeights)
+                RaycastHit hitPoint;
+                if (Physics.Raycast(position + new Vector3(0, 50, 0), Vector3.down, out RaycastHit hit, Mathf.Infinity, GroundLayerMask))
+                {
+                    int currentChunkCoordX = Mathf.RoundToInt(transform.position.x / R_EndlessTerrain.Instance.chunkSize);
+                    int currentChunkCoordY = Mathf.RoundToInt(transform.position.y / R_EndlessTerrain.Instance.chunkSize);
+
+                    Vector2 currentChunkCoord = new Vector2(currentChunkCoordX, currentChunkCoordY);
+
+                    if(position.x > R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mapData.heightMap.Length)
+                    {
+
+                    }
+                    heightValue = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mapData.heightMap[(int)position.x, (int)position.y];
+                    hitPoint = hit;
+                }
+
+                if (i <= emptySpaceWeights)
                 {
                     continue;
                 }
                 else if(i <= treeWeights + emptySpaceWeights)
                 {
                     element = RandomElement(trees);
+                    canSpawn = (heightValue >= element.minSpawnHeight && heightValue <= element.maxSpawnHeight ) ? false : true;
                 }
                 else if(i <= rockWeights + treeWeights + emptySpaceWeights)
                 {
                     element = RandomElement(rocks);
+                    canSpawn = (heightValue >= element.minSpawnHeight && heightValue <= element.maxSpawnHeight) ? false : true;
                 }
 
-                if (element != null)
+                if (element != null && canSpawn)
                 { 
 
-                    Vector3 position = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
                     Vector3 offset = new Vector3(Random.Range(-element.elementPositionOffset, element.elementPositionOffset), 0, Random.Range(-element.elementPositionOffset, element.elementPositionOffset));
                     Vector3 rotation = new Vector3(Random.Range(0, element.elementRotationOffset), Random.Range(0, 360f), Random.Range(0, element.elementRotationOffset));
                     Vector3 scale = Vector3.one * Random.Range(element.elementScaleOffsetMin, element.elementScaleOffsetMax);
@@ -91,9 +123,9 @@ public class R_NatureGenerator : MonoBehaviour
                     newElement.transform.eulerAngles = rotation;
                     newElement.transform.localScale = scale;
 
-                    if (Physics.Raycast(newElement.transform.position + new Vector3 (0,50,0), Vector3.down, out RaycastHit hit, Mathf.Infinity, GroundLayerMask)) 
+                    if (Physics.Raycast(newElement.transform.position + new Vector3 (0,50,0), Vector3.down, out RaycastHit newhit, Mathf.Infinity, GroundLayerMask)) 
                     { 
-                        newElement.transform.position = new Vector3(newElement.transform.position.x, hit.point.y, newElement.transform.position.z); 
+                        newElement.transform.position = new Vector3(newElement.transform.position.x, newhit.point.y, newElement.transform.position.z); 
                     }
                     else
                     {

@@ -70,29 +70,48 @@ public class R_ElementClass : MonoBehaviour
 
     public void SpawnNewElement(Vector3 spawnOrigin)
     {
-        Debug.Log("Spawn New Element");
         Vector3 position = new Vector3(spawnOrigin.x, spawnOrigin.y, spawnOrigin.z);
-        Vector3 offset = new Vector3(Random.Range(-element.elementPositionOffset, element.elementPositionOffset), 0, Random.Range(-element.elementPositionOffset, element.elementPositionOffset));
-        Vector3 rotation = new Vector3(Random.Range(0, element.elementRotationOffset), Random.Range(0, 360f), Random.Range(0, element.elementRotationOffset));
-        Vector3 scale = Vector3.one * Random.Range(element.elementScaleOffsetMin, element.elementScaleOffsetMax);
+        float heightValue = 0;
+        bool canSpawn = false;
 
-        GameObject newElement = Instantiate(element.prefab);
-        if (R_NatureGenerator.Instance != null) { newElement.transform.SetParent(R_NatureGenerator.Instance.transform); }
-        newElement.GetComponent<R_ElementClass>().scale = scale;
-        newElement.transform.position = position + offset;
-        newElement.transform.eulerAngles = rotation;
-        newElement.transform.localScale = scale;
+        RaycastHit hitPoint;
+        if (Physics.Raycast(position + new Vector3(0, 50, 0), Vector3.down, out RaycastHit hit, Mathf.Infinity, 1 << 6))
+        {
+            int currentChunkCoordX = Mathf.RoundToInt(transform.position.x / R_EndlessTerrain.Instance.chunkSize);
+            int currentChunkCoordY = Mathf.RoundToInt(transform.position.y / R_EndlessTerrain.Instance.chunkSize);
 
-        if (Physics.Raycast(newElement.transform.position + new Vector3(0, 50, 0), Vector3.down, out RaycastHit hit, Mathf.Infinity, 1 << 6))
-        {
-            Debug.Log(hit.transform.gameObject);
-            newElement.transform.position = new Vector3(newElement.transform.position.x, hit.point.y, newElement.transform.position.z);
+            Vector2 currentChunkCoord = new Vector2(currentChunkCoordX, currentChunkCoordY);
+            heightValue = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mapData.heightMap[(int)position.x, (int)position.y];
+            hitPoint = hit;
+
+
+            canSpawn = (heightValue >= element.minSpawnHeight && heightValue <= element.maxSpawnHeight) ? false : true;
         }
-        else
+
+        if(canSpawn)
         {
-            newElement.transform.position = new Vector3(newElement.transform.position.x, 0, newElement.transform.position.z);
+            Vector3 offset = new Vector3(Random.Range(-element.elementPositionOffset, element.elementPositionOffset), 0, Random.Range(-element.elementPositionOffset, element.elementPositionOffset));
+            Vector3 rotation = new Vector3(Random.Range(0, element.elementRotationOffset), Random.Range(0, 360f), Random.Range(0, element.elementRotationOffset));
+            Vector3 scale = Vector3.one * Random.Range(element.elementScaleOffsetMin, element.elementScaleOffsetMax);
+
+            GameObject newElement = Instantiate(element.prefab);
+            if (R_NatureGenerator.Instance != null) { newElement.transform.SetParent(R_NatureGenerator.Instance.transform); }
+            newElement.GetComponent<R_ElementClass>().scale = scale;
+            newElement.transform.position = position + offset;
+            newElement.transform.eulerAngles = rotation;
+            newElement.transform.localScale = scale;
+
+            if (Physics.Raycast(newElement.transform.position + new Vector3(0, 50, 0), Vector3.down, out RaycastHit newhit, Mathf.Infinity, 1 << 6))
+            {
+                Debug.Log(hit.transform.gameObject);
+                newElement.transform.position = new Vector3(newElement.transform.position.x, hit.point.y, newElement.transform.position.z);
+            }
+            else
+            {
+                newElement.transform.position = new Vector3(newElement.transform.position.x, 0, newElement.transform.position.z);
+            }
+            if (R_NatureGenerator.Instance != null) { R_NatureGenerator.Instance.SpawnedElements.Add(newElement); }
         }
-        if (R_NatureGenerator.Instance != null) { R_NatureGenerator.Instance.SpawnedElements.Add(newElement); }
         Destroy(gameObject);
     }
 }
@@ -109,4 +128,6 @@ public class Element
     public float elementScaleOffsetMin = 0.5f;
 
     public int ElementSpawnWeight = 1;
+    public float minSpawnHeight = 0.4f;
+    public float maxSpawnHeight = 0.6f;
 }
