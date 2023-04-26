@@ -13,6 +13,7 @@ public class R_PlaneGenerator : MonoBehaviour
 
     public int xSize = 20;
     public int zSize = 20;
+    [Range(0, 100)] public float riverSize = 5;
 
     [Header("Terrain Settings")]
     [Range(0, 100)] public float amplitude = 1f;
