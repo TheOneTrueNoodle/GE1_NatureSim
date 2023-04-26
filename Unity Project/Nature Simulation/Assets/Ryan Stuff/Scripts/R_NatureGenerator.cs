@@ -50,129 +50,103 @@ public class R_NatureGenerator : MonoBehaviour
 
     public void Generate()
     {
-        StartCoroutine(SpawnElements());
+        newSpawnElements();
     }
 
-
-
-    private IEnumerator SpawnElements()
+    private void newSpawnElements()
     {
-       
-        foreach(GameObject gameObject in SpawnedElements)
+        foreach (GameObject gameObject in SpawnedElements)
         {
             Destroy(gameObject);
         }
 
-        for (int x = -natureSize/2; x < natureSize/2; x += elementSpacing)
+
+        Vector3 raycastPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+
+        if (Physics.Raycast(raycastPosition + new Vector3(0, 50, 0), Vector3.down, out RaycastHit hit, Mathf.Infinity, GroundLayerMask))
         {
-            for (int z = -natureSize / 2; z < natureSize / 2; z += elementSpacing)
+            Debug.Log("Hit Terrain");
+            int currentChunkCoordX = Mathf.RoundToInt(transform.position.x / R_EndlessTerrain.Instance.chunkSize);
+            int currentChunkCoordY = Mathf.RoundToInt(transform.position.z / R_EndlessTerrain.Instance.chunkSize);
+
+            Vector2 currentChunkCoord = new Vector2(currentChunkCoordX, currentChunkCoordY);
+            for (int y = 0; y < R_EndlessTerrain.Instance.chunkSize; y++)
             {
-                yield return new WaitForSeconds(SpawnDelay);
-                Element element = null;
-                float totalWeights = emptySpaceWeights + treeWeights + rockWeights;
-                int i = Random.Range(0, (int)totalWeights);
-
-                Vector3 position = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
-                float heightValue = 0;
-                bool canSpawn = false;
-
-                RaycastHit hitPoint;
-                if (Physics.Raycast(position + new Vector3(0, 50, 0), Vector3.down, out RaycastHit hit, Mathf.Infinity, GroundLayerMask))
+                for (int x = 0; x < R_EndlessTerrain.Instance.chunkSize; x++)
                 {
-                    int currentChunkCoordX = Mathf.RoundToInt(transform.position.x / R_EndlessTerrain.Instance.chunkSize);
-                    int currentChunkCoordY = Mathf.RoundToInt(transform.position.y / R_EndlessTerrain.Instance.chunkSize);
-
-                    Vector2 currentChunkCoord = new Vector2(currentChunkCoordX, currentChunkCoordY);
-
-                    if(position.x > R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mapData.heightMap.Length)
+                    //yield return new WaitForSeconds(SpawnDelay);
+                    if (R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mapData.terrainMap[y * R_EndlessTerrain.Instance.chunkSize + x].SpawnElements)
                     {
+                        Debug.Log(currentChunkCoord);
+                        bool canSpawn = false;
+                        Element element = null;
+                        TerrainType terrain = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mapData.terrainMap[y * R_EndlessTerrain.Instance.chunkSize + x];
 
+                        //Debug.Log(x + " , " + y);
+                        Debug.Log(terrain.name);
+
+                        float totalWeights = terrain.chanceForNoElement;
+                        foreach (Element e in terrain.Elements)
+                        {
+                            totalWeights += e.SpawnWeight;
+                        }
+                        float roll = Random.Range(0, totalWeights);
+                        if (roll <= terrain.chanceForNoElement)
+                        {
+                            Debug.Log("Nothing");
+                            continue;
+                        }
+                        else
+                        {
+                            float lastWeight = terrain.chanceForNoElement;
+                            foreach (Element e in terrain.Elements)
+                            {
+                                if (roll <= e.SpawnWeight + lastWeight)
+                                {
+                                    canSpawn = true;
+                                    element = e;
+                                    break;
+                                }
+                                else { lastWeight += e.SpawnWeight; }
+                            }
+                        }
+                        Mesh mesh = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mesh;
+                        Vector3 position = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[y * R_EndlessTerrain.Instance.chunkSize + x]);
+                        //Debug.Log(position);
+                        //Spawning time
+                        SpawnElement(element, canSpawn, position, R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform);
                     }
-                    heightValue = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mapData.heightMap[(int)position.x, (int)position.y];
-                    hitPoint = hit;
-                }
-
-                if (i <= emptySpaceWeights)
-                {
-                    continue;
-                }
-                else if(i <= treeWeights + emptySpaceWeights)
-                {
-                    element = RandomElement(trees);
-                    canSpawn = (heightValue >= element.minSpawnHeight && heightValue <= element.maxSpawnHeight ) ? false : true;
-                }
-                else if(i <= rockWeights + treeWeights + emptySpaceWeights)
-                {
-                    element = RandomElement(rocks);
-                    canSpawn = (heightValue >= element.minSpawnHeight && heightValue <= element.maxSpawnHeight) ? false : true;
-                }
-
-                if (element != null && canSpawn)
-                { 
-
-                    Vector3 offset = new Vector3(Random.Range(-element.elementPositionOffset, element.elementPositionOffset), 0, Random.Range(-element.elementPositionOffset, element.elementPositionOffset));
-                    Vector3 rotation = new Vector3(Random.Range(0, element.elementRotationOffset), Random.Range(0, 360f), Random.Range(0, element.elementRotationOffset));
-                    Vector3 scale = Vector3.one * Random.Range(element.elementScaleOffsetMin, element.elementScaleOffsetMax);
-
-                    
-
-                    GameObject newElement = Instantiate(element.prefab);
-                    newElement.transform.SetParent(transform);
-                    newElement.GetComponent<R_ElementClass>().scale = scale;
-                    newElement.transform.position = position + offset;
-                    newElement.transform.eulerAngles = rotation;
-                    newElement.transform.localScale = scale;
-
-                    if (Physics.Raycast(newElement.transform.position + new Vector3 (0,50,0), Vector3.down, out RaycastHit newhit, Mathf.Infinity, GroundLayerMask)) 
-                    { 
-                        newElement.transform.position = new Vector3(newElement.transform.position.x, newhit.point.y, newElement.transform.position.z); 
-                    }
-                    else
-                    {
-                        newElement.transform.position = new Vector3(newElement.transform.position.x, 0, newElement.transform.position.z); 
-                    }
-
-                    SpawnedElements.Add(newElement);
                 }
             }
         }
     }
 
-    private Element RandomElement(List<Element> Elements)
+    private void SpawnElement(Element element, bool canSpawn, Vector3 position, Transform parent)
     {
-        int totalWeight = 0;
-        List<int> ElementWeights = new List<int>();
-        foreach(Element element in Elements)
+        if (element != null && canSpawn)
         {
-            totalWeight += element.ElementSpawnWeight;
-            ElementWeights.Add(element.ElementSpawnWeight);
+            Vector3 offset = new Vector3(Random.Range(-element.PositionOffset, element.PositionOffset), 0, Random.Range(-element.PositionOffset, element.PositionOffset));
+            Vector3 rotation = new Vector3(Random.Range(0, element.RotationOffset), Random.Range(0, 360f), Random.Range(0, element.RotationOffset));
+            Vector3 scale = Vector3.one * Random.Range(element.ScaleOffsetMin, element.ScaleOffsetMax);
+
+
+
+            GameObject newElement = Instantiate(element.prefab);
+            newElement.transform.SetParent(parent);
+            newElement.transform.position = position + offset;
+            newElement.transform.eulerAngles = rotation;
+            newElement.transform.localScale = scale;
+
+            if (Physics.Raycast(newElement.transform.position + new Vector3(0, 50, 0), Vector3.down, out RaycastHit newhit, Mathf.Infinity, GroundLayerMask))
+            {
+                newElement.transform.position = new Vector3(newElement.transform.position.x, newhit.point.y, newElement.transform.position.z);
+            }
+            else
+            {
+                newElement.transform.position = new Vector3(newElement.transform.position.x, 0, newElement.transform.position.z);
+            }
+
+            SpawnedElements.Add(newElement);
         }
-
-        Debug.Log(totalWeight);
-
-        int roll = Random.Range(0, totalWeight + 1);
-
-        for(int i = 0; i < Elements.Count; i++)
-        {
-            int WeightCheck = 0;
-            for(int j = 0; j <= i; j++)
-            {
-                WeightCheck += ElementWeights[j];
-            }
-
-            if (i != 0)
-            {
-                if (roll > ElementWeights[i - 1] && roll <= WeightCheck)
-                {
-                    return Elements[i];
-                }
-            }
-            else if (roll < WeightCheck)
-            {
-                return Elements[i];
-            }
-        }
-
-        return null;
     }
 }

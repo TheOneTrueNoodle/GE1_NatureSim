@@ -90,9 +90,9 @@ public class R_ElementClass : MonoBehaviour
 
         if(canSpawn)
         {
-            Vector3 offset = new Vector3(Random.Range(-element.elementPositionOffset, element.elementPositionOffset), 0, Random.Range(-element.elementPositionOffset, element.elementPositionOffset));
-            Vector3 rotation = new Vector3(Random.Range(0, element.elementRotationOffset), Random.Range(0, 360f), Random.Range(0, element.elementRotationOffset));
-            Vector3 scale = Vector3.one * Random.Range(element.elementScaleOffsetMin, element.elementScaleOffsetMax);
+            Vector3 offset = new Vector3(Random.Range(-element.PositionOffset, element.PositionOffset), 0, Random.Range(-element.PositionOffset, element.PositionOffset));
+            Vector3 rotation = new Vector3(Random.Range(0, element.RotationOffset), Random.Range(0, 360f), Random.Range(0, element.RotationOffset));
+            Vector3 scale = Vector3.one * Random.Range(element.ScaleOffsetMin, element.ScaleOffsetMax);
 
             GameObject newElement = Instantiate(element.prefab);
             if (R_NatureGenerator.Instance != null) { newElement.transform.SetParent(R_NatureGenerator.Instance.transform); }
@@ -122,12 +122,12 @@ public class Element
     public string name;
     public GameObject prefab;
 
-    public float elementPositionOffset = 1;
-    public float elementRotationOffset = 5f;
-    public float elementScaleOffsetMax = 1f;
-    public float elementScaleOffsetMin = 0.5f;
+    public float PositionOffset = 1;
+    public float RotationOffset = 5f;
+    public float ScaleOffsetMax = 1f;
+    public float ScaleOffsetMin = 0.5f;
 
-    public int ElementSpawnWeight = 1;
+    public int SpawnWeight = 1;
     public float minSpawnHeight = 0.4f;
     public float maxSpawnHeight = 0.6f;
 }

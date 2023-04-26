@@ -113,6 +113,7 @@ public class R_MapGenerator : MonoBehaviour
     {
         float[,] noiseMap = R_LandmassNoise.GenerateNoiseMap(mapChunkSize + 2, mapChunkSize + 2, seed, noiseScale, octaves, persistance, lacunarity, center + offset, normalizeMode);
         Color[] colorMap = new Color[mapChunkSize * mapChunkSize];
+        TerrainType[] terrainMap = new TerrainType[mapChunkSize * mapChunkSize];
 
         for (int y = 0; y < mapChunkSize; y++)
         {
@@ -128,6 +129,7 @@ public class R_MapGenerator : MonoBehaviour
                     if(currentHeight >= regions[i].height)
                     {
                         colorMap[y * mapChunkSize + x] = regions[i].color;
+                        terrainMap[y * mapChunkSize + x] = regions[i];
                     }
                     else
                     {
@@ -137,7 +139,7 @@ public class R_MapGenerator : MonoBehaviour
             }
         }
 
-        return new MapData(noiseMap, colorMap);
+        return new MapData(noiseMap, colorMap, terrainMap);
     }  
     private void OnValidate()
     {
@@ -166,16 +168,22 @@ public struct TerrainType
     public string name;
     public float height;
     public Color color;
+
+    public bool SpawnElements;
+    [Range(0, 100)] public float chanceForNoElement;
+    public Element[] Elements;
 }
 
 public struct MapData
 {
     public readonly float[,] heightMap;
     public readonly Color[] colorMap;
+    public readonly TerrainType[] terrainMap;
 
-    public MapData (float[,] heightMap, Color[] colorMap)
+    public MapData (float[,] heightMap, Color[] colorMap, TerrainType[] terrainMap)
     {
         this.heightMap = heightMap;
         this.colorMap = colorMap;
+        this.terrainMap = terrainMap;
     }
 }
