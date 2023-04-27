@@ -239,6 +239,7 @@ GameObject:
   - component: {fileID: 4459153557537905470}
   - component: {fileID: 4459153557537905471}
   - component: {fileID: 5670337546867176700}
+  - component: {fileID: -4788245813893029080}
   m_Layer: 0
   m_Name: Test_Fruit
   m_TagString: Fruit
@@ -284,6 +285,7 @@ MonoBehaviour:
     SpawnWeight: 1
     minSpawnHeight: 0.4
     maxSpawnHeight: 0.6
+    meshSpawnedPosition: 0
   Grows: 1
   Dies: 1
   MaxLifetime: 60
@@ -308,6 +310,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-4788245813893029080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4459153557537905465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79ee61aaf0200545babe093f506af2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 5670337546867176700}
+  depthBeforeSubmerged: 1
+  displacementAmount: 3
 --- !u!1 &4459153557725297367
 GameObject:
   m_ObjectHideFlags: 0
