@@ -434,7 +434,7 @@ Transform:
   - {fileID: 1564091979561606343}
   - {fileID: 1564091979089832713}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &570196546
 MonoBehaviour:
@@ -451,14 +451,17 @@ MonoBehaviour:
   element:
     name: Test Tree
     prefab: {fileID: 1564091978595058869}
-    elementPositionOffset: 1
-    elementRotationOffset: 5
-    elementScaleOffsetMax: 1
-    elementScaleOffsetMin: 0.5
-    ElementSpawnWeight: 1
+    PositionOffset: 1
+    RotationOffset: 5
+    ScaleOffsetMax: 1
+    ScaleOffsetMin: 0.5
+    SpawnWeight: 50
+    minSpawnHeight: 0.4
+    maxSpawnHeight: 0.6
+    meshSpawnedPosition: 0
   Grows: 1
   Dies: 1
-  MaxLifetime: 210
+  MaxLifetime: 240
   MinLifetime: 90
   GrowSpeed: 0.5
   ChanceForNewElement: 50

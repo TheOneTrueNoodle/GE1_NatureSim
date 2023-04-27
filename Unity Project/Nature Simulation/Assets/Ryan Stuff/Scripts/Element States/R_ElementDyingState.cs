@@ -22,7 +22,7 @@ public class R_ElementDyingState : R_ElementBaseState
 
             if (newTree < element.ChanceForNewElement)
             {
-                element.SpawnNewElement(element.transform.position);
+                element.SpawnNewElement(element.transform.position);    
             }
             else
             {
