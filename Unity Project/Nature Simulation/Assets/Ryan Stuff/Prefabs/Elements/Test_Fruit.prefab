@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 5670337546867176700}
   m_Layer: 0
   m_Name: Test_Fruit
-  m_TagString: Untagged
+  m_TagString: Fruit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -277,11 +277,13 @@ MonoBehaviour:
   element:
     name: Fruit
     prefab: {fileID: 780671122100451133, guid: fe695714594ff3f409edfb697e76103a, type: 3}
-    elementPositionOffset: 1
-    elementRotationOffset: 5
-    elementScaleOffsetMax: 1
-    elementScaleOffsetMin: 0.5
-    ElementSpawnWeight: 1
+    PositionOffset: 1
+    RotationOffset: 5
+    ScaleOffsetMax: 1
+    ScaleOffsetMin: 0.5
+    SpawnWeight: 1
+    minSpawnHeight: 0.4
+    maxSpawnHeight: 0.6
   Grows: 1
   Dies: 1
   MaxLifetime: 60

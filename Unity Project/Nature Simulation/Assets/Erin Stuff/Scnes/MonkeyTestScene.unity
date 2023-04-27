@@ -693,7 +693,7 @@ GameObject:
   - component: {fileID: 404891092}
   m_Layer: 0
   m_Name: MonkeyHeadAim
-  m_TagString: Untagged
+  m_TagString: Fruit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -706,7 +706,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 404891091}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.57, y: 0, z: 7.89}
+  m_LocalPosition: {x: 0, y: 1.205, z: 3.692}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1363,9 +1363,9 @@ MonoBehaviour:
     m_Bits: 64
   body: {fileID: 1419892790}
   otherFoot: {fileID: 1926574189}
-  speed: 2
-  stepDistance: 1
-  stepLength: 1
+  speed: 3
+  stepDistance: 2
+  stepLength: 2
   stepHeight: 0.75
   footOffset: {x: 0, y: 0, z: 0}
   footSpacing: {x: 0, y: 0, z: 0}
@@ -2955,7 +2955,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1577701433}
   - component: {fileID: 1577701434}
-  - component: {fileID: 1577701435}
+  - component: {fileID: 1577701436}
   m_Layer: 0
   m_Name: MonkeyRoot
   m_TagString: Untagged
@@ -3001,7 +3001,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1577701435
+--- !u!114 &1577701436
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3010,10 +3010,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1577701432}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 035093f02b5e9ab4fb18d150faf55788, type: 3}
+  m_Script: {fileID: 11500000, guid: c16a07bf764b25a4788020d3c7b66102, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 404891091}
+  LeftArm: {fileID: 411661966}
+  RightArm: {fileID: 1216953393}
 --- !u!1 &1666494059
 GameObject:
   m_ObjectHideFlags: 0
@@ -3271,9 +3272,9 @@ MonoBehaviour:
     m_Bits: 64
   body: {fileID: 311871916}
   otherFoot: {fileID: 742560796}
-  speed: 2
-  stepDistance: 1
-  stepLength: 1
+  speed: 3
+  stepDistance: 2
+  stepLength: 2
   stepHeight: 0.75
   footOffset: {x: 0, y: 0, z: 0}
   footSpacing: {x: 0, y: 0, z: 0}

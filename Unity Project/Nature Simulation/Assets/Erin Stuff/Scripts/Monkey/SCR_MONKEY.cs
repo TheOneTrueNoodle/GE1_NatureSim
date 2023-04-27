@@ -7,6 +7,8 @@ public class SCR_MONKEY : MonoBehaviour
 {
     private NavMeshAgent agent;
     [SerializeField] private GameObject Target;
+
+    
     
     void Start()
     {
