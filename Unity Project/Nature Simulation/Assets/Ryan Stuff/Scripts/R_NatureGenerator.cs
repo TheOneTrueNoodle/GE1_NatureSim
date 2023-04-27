@@ -70,14 +70,13 @@ public class R_NatureGenerator : MonoBehaviour
             int currentChunkCoordY = Mathf.RoundToInt(transform.position.z / R_EndlessTerrain.Instance.chunkSize);
 
             Vector2 currentChunkCoord = new Vector2(currentChunkCoordX, currentChunkCoordY);
-            for (int y = 0; y < R_EndlessTerrain.Instance.chunkSize; y++)
+            for (int y = 0; y < R_EndlessTerrain.Instance.chunkSize; y += elementSpacing)
             {
-                for (int x = 0; x < R_EndlessTerrain.Instance.chunkSize; x++)
+                for (int x = 0; x < R_EndlessTerrain.Instance.chunkSize; x += elementSpacing)
                 {
                     //yield return new WaitForSeconds(SpawnDelay);
                     if (R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mapData.terrainMap[y * R_EndlessTerrain.Instance.chunkSize + x].SpawnElements)
                     {
-                        Debug.Log(currentChunkCoord);
                         bool canSpawn = false;
                         Element element = null;
                         TerrainType terrain = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mapData.terrainMap[y * R_EndlessTerrain.Instance.chunkSize + x];
@@ -104,6 +103,7 @@ public class R_NatureGenerator : MonoBehaviour
                                 if (roll <= e.SpawnWeight + lastWeight)
                                 {
                                     canSpawn = true;
+                                    element = null;
                                     element = e;
                                     break;
                                 }
@@ -112,7 +112,9 @@ public class R_NatureGenerator : MonoBehaviour
                         }
                         Mesh mesh = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mesh;
                         Vector3 position = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[y * R_EndlessTerrain.Instance.chunkSize + x]);
-                        //Debug.Log(position);
+                        //element.meshPosition = y * R_EndlessTerrain.Instance.chunkSize + x;
+
+                        Debug.Log(position);
                         //Spawning time
                         SpawnElement(element, canSpawn, position, R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform);
                     }
@@ -129,12 +131,10 @@ public class R_NatureGenerator : MonoBehaviour
             Vector3 rotation = new Vector3(Random.Range(0, element.RotationOffset), Random.Range(0, 360f), Random.Range(0, element.RotationOffset));
             Vector3 scale = Vector3.one * Random.Range(element.ScaleOffsetMin, element.ScaleOffsetMax);
 
-
-
             GameObject newElement = Instantiate(element.prefab);
             newElement.transform.SetParent(parent);
             newElement.transform.position = position + offset;
-            newElement.transform.eulerAngles = rotation;
+            newElement.transform.localEulerAngles = rotation;
             newElement.transform.localScale = scale;
 
             if (Physics.Raycast(newElement.transform.position + new Vector3(0, 50, 0), Vector3.down, out RaycastHit newhit, Mathf.Infinity, GroundLayerMask))

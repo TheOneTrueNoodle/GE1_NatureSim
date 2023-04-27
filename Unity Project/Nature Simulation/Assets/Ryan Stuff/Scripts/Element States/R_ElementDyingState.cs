@@ -14,7 +14,7 @@ public class R_ElementDyingState : R_ElementBaseState
         {
             var t = 0f;
             t += element.GrowSpeed * Time.deltaTime;
-            element.transform.localScale += new Vector3(t, t, t);
+            element.transform.localScale -= new Vector3(t, t, t);
         }
         else
         {
