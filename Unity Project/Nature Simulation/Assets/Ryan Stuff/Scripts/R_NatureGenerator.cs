@@ -60,16 +60,13 @@ public class R_NatureGenerator : MonoBehaviour
             Destroy(gameObject);
         }
 
-
         Vector3 raycastPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
         if (Physics.Raycast(raycastPosition + new Vector3(0, 50, 0), Vector3.down, out RaycastHit hit, Mathf.Infinity, GroundLayerMask))
         {
             Debug.Log("Hit Terrain");
-            int currentChunkCoordX = Mathf.RoundToInt(transform.position.x / R_EndlessTerrain.Instance.chunkSize);
-            int currentChunkCoordY = Mathf.RoundToInt(transform.position.z / R_EndlessTerrain.Instance.chunkSize);
 
-            Vector2 currentChunkCoord = new Vector2(currentChunkCoordX, currentChunkCoordY);
+            Vector2 currentChunkCoord = hit.collider.gameObject.GetComponent<R_TerrainReferenceData>().coord;
             for (int y = 0; y < R_EndlessTerrain.Instance.chunkSize; y += elementSpacing)
             {
                 for (int x = 0; x < R_EndlessTerrain.Instance.chunkSize; x += elementSpacing)

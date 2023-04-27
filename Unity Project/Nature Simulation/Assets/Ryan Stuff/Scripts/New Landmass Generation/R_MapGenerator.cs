@@ -6,6 +6,8 @@ using System.Threading;
 
 public class R_MapGenerator : MonoBehaviour
 {
+    [HideInInspector] public static R_MapGenerator instance;
+
     public enum DrawMode { NoiseMap, ColorMap, Mesh, FalloffMap};
     public DrawMode drawMode;
 
@@ -30,7 +32,17 @@ public class R_MapGenerator : MonoBehaviour
     private void Awake()
     {
         falloffMap = R_FalloffGenerator.GenerateFalloffMap(mapChunkSize + 2);
+
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
     }
+
     void GenerateFalloffMap()
     {
         if (terrainData.useFallOff && !falloffMapGenerated)

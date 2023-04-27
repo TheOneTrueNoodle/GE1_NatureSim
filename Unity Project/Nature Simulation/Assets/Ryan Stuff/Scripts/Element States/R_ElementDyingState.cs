@@ -18,9 +18,9 @@ public class R_ElementDyingState : R_ElementBaseState
         }
         else
         {
-            int newTree = Random.Range(1, 100);
+            int newElement = Random.Range(1, 100);
 
-            if (newTree < element.ChanceForNewElement)
+            if (newElement < element.ChanceForNewElement)
             {
                 element.SpawnNewElement(element.transform.position);    
             }

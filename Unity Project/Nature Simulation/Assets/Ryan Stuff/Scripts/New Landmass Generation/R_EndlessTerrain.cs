@@ -117,6 +117,8 @@ public class R_EndlessTerrain : MonoBehaviour
             meshRenderer = meshObject.AddComponent<MeshRenderer>();
             meshFilter = meshObject.AddComponent<MeshFilter>();
             meshCollider = meshObject.AddComponent<MeshCollider>();
+            R_TerrainReferenceData terrainData = meshObject.AddComponent<R_TerrainReferenceData>();
+            terrainData.coord = coord;
             meshRenderer.material = material;
 
             meshObject.transform.position = positionV3 * mapGenerator.terrainData.uniformScale;
