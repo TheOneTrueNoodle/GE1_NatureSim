@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class R_EndlessTerrain : MonoBehaviour
 {
@@ -100,6 +101,7 @@ public class R_EndlessTerrain : MonoBehaviour
         LODInfo[] detailLevels;
         LODMesh[] lodMeshes;
         LODMesh collisionLODMesh;
+        NavMeshSurface navMeshSurface;
 
         public MapData mapData;
         bool mapDataReceived;
@@ -121,6 +123,7 @@ public class R_EndlessTerrain : MonoBehaviour
             meshFilter = meshObject.AddComponent<MeshFilter>();
             meshCollider = meshObject.AddComponent<MeshCollider>();
             R_TerrainReferenceData terrainData = meshObject.AddComponent<R_TerrainReferenceData>();
+            navMeshSurface = meshObject.AddComponent<NavMeshSurface>();
             terrainData.coord = coord;
             meshRenderer.material = material;
 
@@ -200,6 +203,7 @@ public class R_EndlessTerrain : MonoBehaviour
                     if(collisionLODMesh.hasMesh)
                     {
                         meshCollider.sharedMesh = collisionLODMesh.mesh;
+                        navMeshSurface.BuildNavMesh();
 
                         if(generatedElements)
                         {

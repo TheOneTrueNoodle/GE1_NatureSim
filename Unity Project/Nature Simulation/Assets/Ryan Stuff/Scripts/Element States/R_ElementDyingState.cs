@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class R_ElementDyingState : R_ElementBaseState
 {
+    public override void EnterState(R_ElementClass element)
+    {
+
+    }
+
     public override void UpdateState(R_ElementClass element)
     {
         if (element.transform.localScale.x > 0)
