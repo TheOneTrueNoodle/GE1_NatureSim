@@ -98,6 +98,7 @@ public class R_ElementClass : MonoBehaviour
                 //int x = Xdistance * currentChunkCoordX;
                 //int y = Ydistance * currentChunkCoordY;
                 //y * R_EndlessTerrain.Instance.chunkSize + x;
+                Debug.Log(R_EndlessTerrain.Instance.chunkSize);
                 if (x < R_EndlessTerrain.Instance.chunkSize && y < R_EndlessTerrain.Instance.chunkSize)
                 {
                     Debug.Log("Within bounds");
