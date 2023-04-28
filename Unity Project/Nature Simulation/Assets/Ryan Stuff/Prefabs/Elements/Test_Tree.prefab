@@ -451,7 +451,7 @@ MonoBehaviour:
   element:
     name: Test Tree
     prefab: {fileID: 1564091978595058869}
-    PositionOffset: 1
+    PositionOffset: 2.6
     RotationOffset: 5
     ScaleOffsetMax: 1
     ScaleOffsetMin: 0.5
@@ -461,10 +461,10 @@ MonoBehaviour:
     meshSpawnedPosition: 0
   Grows: 1
   Dies: 1
-  MaxLifetime: 240
-  MinLifetime: 90
+  MaxLifetime: 2
+  MinLifetime: 1
   GrowSpeed: 0.5
-  ChanceForNewElement: 50
+  ChanceForNewElement: 100
   scale: {x: 1, y: 1, z: 1}
   Grown: 0
 --- !u!1 &1564091978650781860

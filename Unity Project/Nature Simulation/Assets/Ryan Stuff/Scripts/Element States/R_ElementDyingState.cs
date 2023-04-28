@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class R_ElementDyingState : R_ElementBaseState
 {
-    public override void EnterState(R_ElementClass element)
-    {
-
-    }
     public override void UpdateState(R_ElementClass element)
     {
         if (element.transform.localScale.x > 0)
@@ -18,15 +14,15 @@ public class R_ElementDyingState : R_ElementBaseState
         }
         else
         {
-            int newTree = Random.Range(1, 100);
+            int newElement = Random.Range(1, 100);
 
-            if (newTree < element.ChanceForNewElement)
+            if (newElement < element.ChanceForNewElement && element.gameObject.activeInHierarchy)
             {
-                element.SpawnNewElement(element.transform.position);    
+                R_NatureGenerator.Instance.SpawnNewElement(element.gameObject, element.element);
             }
             else
             {
-                element.destroy();
+                R_NatureGenerator.Instance.destroy(element.gameObject, element.element);
             }
         }
     }
