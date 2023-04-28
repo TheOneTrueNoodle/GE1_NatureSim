@@ -104,6 +104,9 @@ public class R_EndlessTerrain : MonoBehaviour
         public MapData mapData;
         bool mapDataReceived;
         int previousLODIndex = -1;
+        bool generatedElements;
+        bool elementsVisible;
+        public List<GameObject> localElements;
 
         public TerrainChunk(Vector2 coord, int size, LODInfo[] detailLevels, Transform parent, Material material)
         {
@@ -120,6 +123,8 @@ public class R_EndlessTerrain : MonoBehaviour
             R_TerrainReferenceData terrainData = meshObject.AddComponent<R_TerrainReferenceData>();
             terrainData.coord = coord;
             meshRenderer.material = material;
+
+            localElements = new List<GameObject>();
 
             meshObject.transform.position = positionV3 * mapGenerator.terrainData.uniformScale;
             meshObject.transform.parent = parent;
@@ -160,6 +165,7 @@ public class R_EndlessTerrain : MonoBehaviour
 
             if(isVisible)
             {
+
                 int lodIndex = 0;
 
                 for(int i = 0; i < detailLevels.Length - 1; i++)
@@ -194,11 +200,42 @@ public class R_EndlessTerrain : MonoBehaviour
                     if(collisionLODMesh.hasMesh)
                     {
                         meshCollider.sharedMesh = collisionLODMesh.mesh;
+
+                        if(generatedElements)
+                        {
+                            if(!elementsVisible)
+                            {
+                                foreach(GameObject e in localElements)
+                                {
+                                    e.SetActive(true);
+                                }
+                                elementsVisible = true;
+                            }
+                        }
+                        else
+                        {
+                            if(meshObject != null && R_NatureGenerator.Instance != null && meshObject.GetComponent<R_TerrainReferenceData>().coord != null)
+                            {
+                                if (Physics.Raycast(meshObject.transform.position + new Vector3(0, 100, 0), Vector3.down, out RaycastHit newhit, Mathf.Infinity, 1 << 6))
+                                {
+                                    R_NatureGenerator.Instance.Generate(meshObject.GetComponent<R_TerrainReferenceData>().coord);
+                                    generatedElements = true;
+                                }
+                            }
+                        }
                     }
                     else if (!collisionLODMesh.hasRequestedMesh)
                     {
                         collisionLODMesh.RequestMesh(mapData);
                     }
+                }
+                else if(generatedElements && elementsVisible)
+                {
+                    foreach (GameObject e in localElements)
+                    {
+                        e.SetActive(false);
+                    }
+                    elementsVisible = false;
                 }
                 
                 terrainChunksVisibleLastUpdate.Add(this);

@@ -45,7 +45,7 @@ public class R_ElementClass : MonoBehaviour
             currentState = livingState;
             currentState.EnterState(this);
         }
-        gameObject.name = element.name; 
+        gameObject.name = element.name;
     }
 
     private void Update()
@@ -63,100 +63,25 @@ public class R_ElementClass : MonoBehaviour
         currentState.EnterState(this);
     }
 
-    public void destroy()
+    private void OnDisable()
     {
-        Destroy(gameObject);
-    }
-
-    public void SpawnNewElement(Vector3 spawnOrigin)
-    {
-        Vector3 raycastPosition = new Vector3(spawnOrigin.x, spawnOrigin.y, spawnOrigin.z);
-
-        if (Physics.Raycast(raycastPosition + new Vector3(0, 100, 0), Vector3.down, out RaycastHit hit, Mathf.Infinity, 1 << 6))
+        if(currentState == dyingState)
         {
-            Vector2 currentChunkCoord = hit.collider.gameObject.GetComponent<R_TerrainReferenceData>().coord;
-            int chunkSize = R_EndlessTerrain.Instance.chunkSize + 1;
-
-            if (R_EndlessTerrain.Instance.terrainChunkDictionary.ContainsKey(currentChunkCoord))
+            for (int i = 0; i < R_EndlessTerrain.Instance.terrainChunkDictionary[element.meshCoord].localElements.Count; i++)
             {
-                Mesh mesh = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mesh;
-
-                float TopLeftXPos = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[0]).x;
-                float TopRightXPos = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[mesh.vertices.Length-1]).x;
-
-                float meshDist = Mathf.Abs(TopLeftXPos - TopRightXPos);
-
-                float vertexLength = meshDist / chunkSize;
-
-                float xFloat = Mathf.Abs(R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[0]).x - spawnOrigin.x);
-                float yFloat = Mathf.Abs(R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[0]).z - spawnOrigin.z);
-
-                int x = Mathf.RoundToInt(xFloat / vertexLength);
-                int y = Mathf.RoundToInt(yFloat / vertexLength);
-
-                //Debug.Log("Current Chunk Coord: " + currentChunkCoord + ", World Position Coord: " + transform.position + ", Local Spawn Coord: " + x + "," + y);
-
-                //int x = Xdistance * currentChunkCoordX;
-                //int y = Ydistance * currentChunkCoordY;
-                //y * R_EndlessTerrain.Instance.chunkSize + x;
-                Debug.Log(chunkSize);
-                if (x <= chunkSize && y <= chunkSize)
+                if (R_EndlessTerrain.Instance.terrainChunkDictionary[element.meshCoord].localElements[i] == gameObject)
                 {
-                    Debug.Log("Within bounds");
-                    Vector3 position = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[y * chunkSize + x]);
-
-                    bool canSpawn = false;
-                    
-                    Debug.Log(R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mapData.terrainMap[y * chunkSize + x].name + "was found");
-                    foreach (Element e in R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mapData.terrainMap[y * chunkSize + x].Elements)
-                    {
-                        if (e.name == element.name) { canSpawn = true; }
-                    }
-                    if (element != null && canSpawn)
-                    {
-                        Vector3 offset = new Vector3(Random.Range(-element.PositionOffset, element.PositionOffset), 0, Random.Range(-element.PositionOffset, element.PositionOffset));
-                        Vector3 rotation = new Vector3(Random.Range(0, element.RotationOffset), Random.Range(0, 360f), Random.Range(0, element.RotationOffset));
-                        Vector3 scale = Vector3.one * Random.Range(element.ScaleOffsetMin, element.ScaleOffsetMax);
-
-                        GameObject newElement = Instantiate(element.prefab);
-                        newElement.transform.SetParent(R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform);
-                        newElement.transform.position = position + offset;
-                        newElement.transform.eulerAngles = rotation;
-                        newElement.transform.localScale = scale;
-
-                        newElement.GetComponent<R_ElementClass>().element.meshSpawnedPosition = y * chunkSize + x;
-
-                        if (Physics.Raycast(newElement.transform.position + new Vector3(0, 50, 0), Vector3.down, out RaycastHit newhit, Mathf.Infinity, 1 << 6))
-                        {
-                            newElement.transform.position = new Vector3(newElement.transform.position.x, newhit.point.y, newElement.transform.position.z);
-                        }
-                        else
-                        {
-                            newElement.transform.position = new Vector3(newElement.transform.position.x, 0, newElement.transform.position.z);
-                        }
-                    }
-                    else if(element == null)
-                    {
-                        Debug.Log("Element was null");
-                    }
-                    else if(canSpawn == false)
-                    {
-                        Debug.Log("canSpawn was false");
-                    }
+                    R_EndlessTerrain.Instance.terrainChunkDictionary[element.meshCoord].localElements.RemoveAt(i);
+                    break;
                 }
-                else
-                {
-                    Debug.Log("Could not spawn this element: " + "Current Chunk Coord: " + currentChunkCoord + ", World Position Coord: " + transform.position + ", Local Spawn Coord: " + x + "," + y);
-                }
-
             }
-            destroy();
-            return;
+            Destroy(gameObject);
         }
-
-        destroy();
     }
 }
+    
+
+    
 
 [System.Serializable]
 public class Element
@@ -173,5 +98,5 @@ public class Element
     public float minSpawnHeight = 0.4f;
     public float maxSpawnHeight = 0.6f;
 
-    [HideInInspector] public int meshSpawnedPosition;
+    [HideInInspector] public Vector2 meshCoord;
 }

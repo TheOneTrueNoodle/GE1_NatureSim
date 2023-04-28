@@ -37,7 +37,7 @@ public class R_FruitTree : R_ElementClass
 
 
             newFruit.transform.SetParent(gameObject.transform.parent);
-            newFruit.GetComponent<R_ElementClass>().element.meshSpawnedPosition = element.meshSpawnedPosition;
+            newFruit.GetComponent<R_ElementClass>().element.meshCoord = element.meshCoord;
 
             newFruit.transform.position = usablePositions[pos].transform.position;
             usablePositions.RemoveAt(pos);
