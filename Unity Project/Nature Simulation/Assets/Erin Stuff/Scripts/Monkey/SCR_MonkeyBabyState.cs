@@ -20,7 +20,7 @@ public class SCR_MonkeyBaby : SCR_MonkeyBaseState
 
       
         NavMeshHit Hit;
-        if(NavMesh.SamplePosition(Monkey.transform.position, out Hit, 5f, NavMesh.AllAreas))
+        if(NavMesh.SamplePosition(Monkey.transform.position, out Hit, 200f, NavMesh.AllAreas))
         {
             Agent = agent;
             Agent.SetDestination(Pos);
