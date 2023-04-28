@@ -282,9 +282,7 @@ MonoBehaviour:
     ScaleOffsetMax: 1
     ScaleOffsetMin: 0.5
     SpawnWeight: 1
-    minSpawnHeight: 0.4
-    maxSpawnHeight: 0.6
-    meshSpawnedPosition: 0
+    meshCoord: {x: 0, y: 0}
   Grows: 1
   Dies: 1
   MaxLifetime: 75

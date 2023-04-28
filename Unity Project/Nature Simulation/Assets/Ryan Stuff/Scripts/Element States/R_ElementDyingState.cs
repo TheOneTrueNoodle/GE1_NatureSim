@@ -25,10 +25,7 @@ public class R_ElementDyingState : R_ElementBaseState
             {
                 R_NatureGenerator.Instance.SpawnNewElement(element.gameObject, element.element);
             }
-            else
-            {
-                R_NatureGenerator.Instance.destroy(element.gameObject, element.element);
-            }
+            R_NatureGenerator.Instance.destroy(element.gameObject, element.element);
         }
     }
 }

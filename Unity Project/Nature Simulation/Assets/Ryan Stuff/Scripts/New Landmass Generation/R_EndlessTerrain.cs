@@ -18,6 +18,10 @@ public class R_EndlessTerrain : MonoBehaviour
 
     public static Vector2 viewerPosition;
     Vector2 viewerPositionOld;
+    public bool firstNavMeshGenerated = false;
+    public bool firstMeshReceived = false;
+
+
     static R_MapGenerator mapGenerator;
     public int chunkSize;
     int chunksVisibleInViewDist;
@@ -51,7 +55,7 @@ public class R_EndlessTerrain : MonoBehaviour
     {
         viewerPosition = new Vector2(viewer.position.x, viewer.position.z) / mapGenerator.terrainData.uniformScale;
 
-        if((viewerPositionOld - viewerPosition).sqrMagnitude > sqrViewerMoveThresholdForChunkUpdate)
+        if ((viewerPositionOld - viewerPosition).sqrMagnitude > sqrViewerMoveThresholdForChunkUpdate)
         {
             viewerPositionOld = viewerPosition;
             UpdateVisibleChunks();
@@ -101,7 +105,6 @@ public class R_EndlessTerrain : MonoBehaviour
         LODInfo[] detailLevels;
         LODMesh[] lodMeshes;
         LODMesh collisionLODMesh;
-        NavMeshSurface navMeshSurface;
 
         public MapData mapData;
         bool mapDataReceived;
@@ -123,7 +126,6 @@ public class R_EndlessTerrain : MonoBehaviour
             meshFilter = meshObject.AddComponent<MeshFilter>();
             meshCollider = meshObject.AddComponent<MeshCollider>();
             R_TerrainReferenceData terrainData = meshObject.AddComponent<R_TerrainReferenceData>();
-            navMeshSurface = meshObject.AddComponent<NavMeshSurface>();
             terrainData.coord = coord;
             meshRenderer.material = material;
 
@@ -186,6 +188,7 @@ public class R_EndlessTerrain : MonoBehaviour
                 if(lodIndex != previousLODIndex)
                 {
                     LODMesh lodMesh = lodMeshes[lodIndex];
+
                     if(lodMesh.hasMesh)
                     {
                         previousLODIndex = lodIndex;
@@ -203,11 +206,11 @@ public class R_EndlessTerrain : MonoBehaviour
                     if(collisionLODMesh.hasMesh)
                     {
                         meshCollider.sharedMesh = collisionLODMesh.mesh;
-                        navMeshSurface.BuildNavMesh();
+                        Instance.firstMeshReceived = true;
 
-                        if(generatedElements)
+                        if (generatedElements)
                         {
-                            if(!elementsVisible)
+                            if (!elementsVisible)
                             {
                                 foreach(GameObject e in localElements)
                                 {

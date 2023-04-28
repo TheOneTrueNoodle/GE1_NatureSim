@@ -4548,6 +4548,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8553385989839475472}
   - component: {fileID: 8553385989839475473}
+  - component: {fileID: -854321447636305843}
   m_Layer: 0
   m_Name: Monkey House
   m_TagString: Untagged
@@ -4569,7 +4570,7 @@ Transform:
   m_Children:
   - {fileID: 8553385989804500714}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8553385989839475473
 MonoBehaviour:
@@ -4603,7 +4604,24 @@ MonoBehaviour:
   monkeyPrefab: {fileID: 490382049794523379, guid: 3f613ed78e8b84d418a1cfbf40790ab9, type: 3}
   maxMonkeySpawns: 4
   monkeySpawnRadius: 10
+  spawnDelay: 2
   monkeys: []
+--- !u!208 &-854321447636305843
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8553385989839475503}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 7, y: 11.76, z: 7}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 3.25, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8553385989848793798
 GameObject:
   m_ObjectHideFlags: 0

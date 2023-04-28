@@ -84,7 +84,7 @@ public class R_NatureGenerator : MonoBehaviour
                 //int y = Ydistance * currentChunkCoordY;
                 //y * R_EndlessTerrain.Instance.chunkSize + x;
                 Debug.Log(chunkSize);
-                if (x <= chunkSize && y <= chunkSize)
+                if (x < chunkSize && y < chunkSize)
                 {
                     Debug.Log("Within bounds");
                     Vector3 position = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[y * chunkSize + x]);
@@ -117,7 +117,7 @@ public class R_NatureGenerator : MonoBehaviour
                         }
                         else
                         {
-                            newElement.transform.position = new Vector3(newElement.transform.position.x, 0, newElement.transform.position.z);
+                            newElement.transform.position = new Vector3(newElement.transform.position.x, 20, newElement.transform.position.z);
                         }
                     }
                     else if (element == null)
@@ -150,7 +150,7 @@ public class R_NatureGenerator : MonoBehaviour
         {
             for (int x = 0; x < chunkSize; x += elementSpacing)
             {
-                if (x <= chunkSize && y <= chunkSize)
+                if (x < chunkSize && y < chunkSize)
                 {
                     //yield return new WaitForSeconds(SpawnDelay);
                     if (R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mapData.terrainMap[y * chunkSize + x].SpawnElements)
@@ -221,7 +221,7 @@ public class R_NatureGenerator : MonoBehaviour
             }
             else
             {
-                newElement.transform.position = new Vector3(newElement.transform.position.x, 0, newElement.transform.position.z);
+                newElement.transform.position = new Vector3(newElement.transform.position.x, 20, newElement.transform.position.z);
             }
 
         }

@@ -107,6 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6857363697955395825}
   - component: {fileID: 1490324568}
+  - component: {fileID: 3103493413806366683}
   m_Layer: 0
   m_Name: Test_Rock
   m_TagString: Untagged
@@ -131,7 +132,7 @@ Transform:
   - {fileID: 6857363698810664694}
   - {fileID: 6857363697726596208}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1490324568
 MonoBehaviour:
@@ -148,11 +149,12 @@ MonoBehaviour:
   element:
     name: Rock
     prefab: {fileID: 6857363697955395826}
-    elementPositionOffset: 1
-    elementRotationOffset: 5
-    elementScaleOffsetMax: 1
-    elementScaleOffsetMin: 0.5
-    ElementSpawnWeight: 1
+    PositionOffset: 1
+    RotationOffset: 5
+    ScaleOffsetMax: 1
+    ScaleOffsetMin: 0.5
+    SpawnWeight: 50
+    meshCoord: {x: 0, y: 0}
   Grows: 0
   Dies: 0
   MaxLifetime: 240
@@ -161,6 +163,22 @@ MonoBehaviour:
   ChanceForNewElement: 0
   scale: {x: 1, y: 1, z: 1}
   Grown: 0
+--- !u!208 &3103493413806366683
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6857363697955395826}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.35, y: 1, z: 1.1}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.15, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &6857363697996353348
 GameObject:
   m_ObjectHideFlags: 0

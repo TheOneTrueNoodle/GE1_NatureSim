@@ -8,20 +8,24 @@ public class R_MonkeyHouse : R_ElementClass
 
     public int maxMonkeySpawns;
     public float monkeySpawnRadius;
+    public float spawnDelay;
 
-    private bool monkeysSpawned;
     public List<GameObject> monkeys;
     [HideInInspector] public R_ManageMonkeysState manageMonkeyState;
 
     new private void Start()
     {
         base.Start();
-        SpawnMonkeys();
+        StartCoroutine(SpawnMonkeys());
     }
 
-    private void SpawnMonkeys()
+    IEnumerator SpawnMonkeys()
     {
+        Debug.Log("Monkey epic spawning time :D:DDDDDD");
+        yield return new WaitForSeconds(spawnDelay);
+
         int numMonkeys = Random.Range(2, maxMonkeySpawns);
+
         for (int i = 0; i <= numMonkeys; i++)
         {
             Vector3 position = RandomPointOnCircleEdge(monkeySpawnRadius) + gameObject.transform.position;
@@ -40,8 +44,6 @@ public class R_MonkeyHouse : R_ElementClass
 
             monkeys.Add(newMonkey);
         }
-
-        monkeysSpawned = true;
     }
 
     private Vector3 RandomPointOnCircleEdge(float radius)
