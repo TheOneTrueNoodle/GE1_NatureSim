@@ -28,6 +28,7 @@ public class SCR_MonkeyStateManager : MonoBehaviour
    public  SCR_MonkeyAfraidState AfraidState = new SCR_MonkeyAfraidState();
    public  SCR_MonkeyEatState EatState = new SCR_MonkeyEatState();
     public SCR_MonkeyBaby BabyState = new SCR_MonkeyBaby();
+    public SCR_MonkeyDoNothing NothingState = new SCR_MonkeyDoNothing();
     public SCR_MonkeyWanderState WanderState = new SCR_MonkeyWanderState();
  
 

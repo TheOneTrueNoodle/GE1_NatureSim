@@ -14,7 +14,7 @@ public class SCR_MonkeyBaby : SCR_MonkeyBaseState
     public override void EnterState(SCR_MonkeyStateManager Monkey, NavMeshAgent agent)
     {
         Monkey.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        Pos = Monkey.transform.position + new Vector3(Random.Range(-20, 20), 0, Random.Range(-20, 20));
+        Pos = Monkey.transform.position + new Vector3(Random.Range(-20, 20), 20, Random.Range(-20, 20));
         Monkey.readytomate = false;
         
 
@@ -51,6 +51,7 @@ public class SCR_MonkeyBaby : SCR_MonkeyBaseState
         T = 0;
 
         Monkey.rend.material.color = Color.white;
+        agent.enabled = true;
       
 
       

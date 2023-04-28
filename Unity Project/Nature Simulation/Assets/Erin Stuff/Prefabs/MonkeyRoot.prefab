@@ -2021,7 +2021,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 490382049794523379}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 0
@@ -2056,6 +2056,7 @@ MonoBehaviour:
   Mouth: {fileID: 490382050553790160}
   hunger: 20
   rend: {fileID: 1229406014181095065}
+  readytomate: 0
 --- !u!95 &490382049794523382
 Animator:
   serializedVersion: 4
