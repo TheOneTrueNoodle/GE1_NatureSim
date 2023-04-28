@@ -37,6 +37,8 @@ public class R_MonkeyHouse : R_ElementClass
 
             newMonkey.transform.position = position;
             newMonkey.SetActive(true);
+
+            monkeys.Add(newMonkey);
         }
 
         monkeysSpawned = true;
