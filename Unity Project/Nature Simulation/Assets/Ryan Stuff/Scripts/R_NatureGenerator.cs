@@ -39,6 +39,7 @@ public class R_NatureGenerator : MonoBehaviour
     {
         newSpawnElements(spawnOrigin);
     }
+
     public void destroy(GameObject spawnOrigin, Element element)
     {
         for (int i = 0; i < R_EndlessTerrain.Instance.terrainChunkDictionary[element.meshCoord].localElements.Count; i++)
@@ -144,8 +145,8 @@ public class R_NatureGenerator : MonoBehaviour
     private void newSpawnElements(Vector2 spawnOrigin)
     {
         int chunkSize = R_EndlessTerrain.Instance.chunkSize + 1;
-
         Vector2 currentChunkCoord = spawnOrigin;
+
         for (int y = 0; y < chunkSize; y += elementSpacing)
         {
             for (int x = 0; x < chunkSize; x += elementSpacing)
@@ -189,7 +190,7 @@ public class R_NatureGenerator : MonoBehaviour
                             }
                         }
                         Mesh mesh = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mesh;
-                        Vector3 position = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[y * chunkSize + x]);
+                        Vector3 position = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[y * chunkSize-1 + x]);
                         //element.meshPosition = y * R_EndlessTerrain.Instance.chunkSize + x;
 
                         //Spawning time

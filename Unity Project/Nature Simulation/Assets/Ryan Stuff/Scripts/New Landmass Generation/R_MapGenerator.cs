@@ -133,7 +133,7 @@ public class R_MapGenerator : MonoBehaviour
 
         float[,] noiseMap = R_LandmassNoise.GenerateNoiseMap(mapChunkSize + 2, mapChunkSize + 2, noiseData.seed, noiseData.noiseScale, noiseData.octaves, noiseData.persistance, noiseData.lacunarity, center + noiseData.offset, noiseData.normalizeMode);
         Color[] colorMap = new Color[(mapChunkSize) * (mapChunkSize)];
-        TerrainType[] terrainMap = new TerrainType[(mapChunkSize) * (mapChunkSize)];
+        TerrainType[] terrainMap = new TerrainType[(mapChunkSize + 1) * (mapChunkSize + 1)];
 
         for (int y = 0; y < mapChunkSize+2; y++)
         {
