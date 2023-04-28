@@ -75,6 +75,7 @@ public class R_ElementClass : MonoBehaviour
         if (Physics.Raycast(raycastPosition + new Vector3(0, 100, 0), Vector3.down, out RaycastHit hit, Mathf.Infinity, 1 << 6))
         {
             Vector2 currentChunkCoord = hit.collider.gameObject.GetComponent<R_TerrainReferenceData>().coord;
+            int chunkSize = R_EndlessTerrain.Instance.chunkSize + 1;
 
             if (R_EndlessTerrain.Instance.terrainChunkDictionary.ContainsKey(currentChunkCoord))
             {
@@ -85,7 +86,7 @@ public class R_ElementClass : MonoBehaviour
 
                 float meshDist = Mathf.Abs(TopLeftXPos - TopRightXPos);
 
-                float vertexLength = meshDist / R_EndlessTerrain.Instance.chunkSize;
+                float vertexLength = meshDist / chunkSize;
 
                 float xFloat = Mathf.Abs(R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[0]).x - spawnOrigin.x);
                 float yFloat = Mathf.Abs(R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[0]).z - spawnOrigin.z);
@@ -98,16 +99,16 @@ public class R_ElementClass : MonoBehaviour
                 //int x = Xdistance * currentChunkCoordX;
                 //int y = Ydistance * currentChunkCoordY;
                 //y * R_EndlessTerrain.Instance.chunkSize + x;
-                Debug.Log(R_EndlessTerrain.Instance.chunkSize);
-                if (x < R_EndlessTerrain.Instance.chunkSize && y < R_EndlessTerrain.Instance.chunkSize)
+                Debug.Log(chunkSize);
+                if (x <= chunkSize && y <= chunkSize)
                 {
                     Debug.Log("Within bounds");
-                    Vector3 position = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[y * R_EndlessTerrain.Instance.chunkSize + x]);
+                    Vector3 position = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[y * chunkSize + x]);
 
                     bool canSpawn = false;
                     
-                    Debug.Log(R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mapData.terrainMap[y * R_EndlessTerrain.Instance.chunkSize + x].name + "was found");
-                    foreach (Element e in R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mapData.terrainMap[y * R_EndlessTerrain.Instance.chunkSize + x].Elements)
+                    Debug.Log(R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mapData.terrainMap[y * chunkSize + x].name + "was found");
+                    foreach (Element e in R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mapData.terrainMap[y * chunkSize + x].Elements)
                     {
                         if (e.name == element.name) { canSpawn = true; }
                     }
@@ -119,11 +120,11 @@ public class R_ElementClass : MonoBehaviour
 
                         GameObject newElement = Instantiate(element.prefab);
                         newElement.transform.SetParent(R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform);
-                        newElement.transform.position = position;
+                        newElement.transform.position = position + offset;
                         newElement.transform.eulerAngles = rotation;
                         newElement.transform.localScale = scale;
 
-                        newElement.GetComponent<R_ElementClass>().element.meshSpawnedPosition = y * R_EndlessTerrain.Instance.chunkSize + x;
+                        newElement.GetComponent<R_ElementClass>().element.meshSpawnedPosition = y * chunkSize + x;
 
                         if (Physics.Raycast(newElement.transform.position + new Vector3(0, 50, 0), Vector3.down, out RaycastHit newhit, Mathf.Infinity, 1 << 6))
                         {

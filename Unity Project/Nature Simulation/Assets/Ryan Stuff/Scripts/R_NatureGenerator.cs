@@ -61,6 +61,7 @@ public class R_NatureGenerator : MonoBehaviour
         }
 
         Vector3 raycastPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        int chunkSize = R_EndlessTerrain.Instance.chunkSize + 1;
 
         if (Physics.Raycast(raycastPosition + new Vector3(0, 50, 0), Vector3.down, out RaycastHit hit, Mathf.Infinity, GroundLayerMask))
         {
@@ -72,11 +73,11 @@ public class R_NatureGenerator : MonoBehaviour
                 for (int x = 0; x < R_EndlessTerrain.Instance.chunkSize; x += elementSpacing)
                 {
                     //yield return new WaitForSeconds(SpawnDelay);
-                    if (R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mapData.terrainMap[y * R_EndlessTerrain.Instance.chunkSize + x].SpawnElements)
+                    if (R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mapData.terrainMap[y * chunkSize + x].SpawnElements)
                     {
                         bool canSpawn = false;
                         Element element = null;
-                        TerrainType terrain = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mapData.terrainMap[y * R_EndlessTerrain.Instance.chunkSize + x];
+                        TerrainType terrain = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mapData.terrainMap[y * chunkSize + x];
 
                         //Debug.Log(x + " , " + y);
                         Debug.Log(terrain.name);
@@ -108,11 +109,11 @@ public class R_NatureGenerator : MonoBehaviour
                             }
                         }
                         Mesh mesh = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mesh;
-                        Vector3 position = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[y * R_EndlessTerrain.Instance.chunkSize + x]);
+                        Vector3 position = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[y * chunkSize + x]);
                         //element.meshPosition = y * R_EndlessTerrain.Instance.chunkSize + x;
 
                         //Spawning time
-                        SpawnElement(element, canSpawn, position, R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform, y * R_EndlessTerrain.Instance.chunkSize + x);
+                        SpawnElement(element, canSpawn, position, R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform, y * chunkSize + x);
                     }
                 }
             }

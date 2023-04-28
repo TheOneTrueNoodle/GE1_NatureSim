@@ -464,7 +464,7 @@ MonoBehaviour:
   MaxLifetime: 2
   MinLifetime: 1
   GrowSpeed: 0.5
-  ChanceForNewElement: 49
+  ChanceForNewElement: 100
   scale: {x: 1, y: 1, z: 1}
   Grown: 0
 --- !u!1 &1564091978650781860
