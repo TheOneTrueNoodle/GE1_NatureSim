@@ -44,8 +44,11 @@ public class SCR_MonkeyEatState : SCR_MonkeyBaseState
     public override void UpdateState(SCR_MonkeyStateManager Monkey) {
 
         T += 1f * Time.deltaTime;
-   
-        Monkey.ArmAim.transform.position = Vector3.Slerp(originalpos.position, Monkey.Mouth.transform.position, T/5);
+
+        if (Monkey.ArmAim != null && Monkey.Mouth != null)
+        {
+            Monkey.ArmAim.transform.position = Vector3.Slerp(originalpos.position, Monkey.Mouth.transform.position, T / 5);
+        }
       
         Agent.SetDestination(Target.transform.position);
 
