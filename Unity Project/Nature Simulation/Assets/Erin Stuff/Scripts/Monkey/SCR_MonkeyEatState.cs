@@ -56,7 +56,7 @@ public class SCR_MonkeyEatState : SCR_MonkeyBaseState
         if (T>1)
         {
             
-            Target.gameObject.SetActive(false);
+            Target.gameObject.GetComponent<R_ElementClass>().SwitchState(Target.gameObject.GetComponent<R_ElementClass>().dyingState);
             Monkey.hunger += 10;
             if (Monkey.hunger > 50)
             {
