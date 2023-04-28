@@ -80,30 +80,35 @@ public class R_ElementClass : MonoBehaviour
             {
                 Mesh mesh = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mesh;
 
-                int x = (int) (Mathf.Abs(R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[0]).x) - Mathf.Abs(spawnOrigin.x / R_MapGenerator.instance.terrainData.uniformScale));
-                int y = (int) (Mathf.Abs(R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[0]).z) - Mathf.Abs(spawnOrigin.z / R_MapGenerator.instance.terrainData.uniformScale));
+                float TopLeftXPos = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[0]).x;
+                float TopRightXPos = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[mesh.vertices.Length-1]).x;
 
+                float meshDist = Mathf.Abs(TopLeftXPos - TopRightXPos);
 
+                float vertexLength = meshDist / R_EndlessTerrain.Instance.chunkSize;
 
-            //Debug.Log("Current Chunk Coord: " + currentChunkCoord + ", World Position Coord: " + transform.position + ", Local Spawn Coord: " + x + "," + y);
+                float xFloat = Mathf.Abs(R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[0]).x - spawnOrigin.x);
+                float yFloat = Mathf.Abs(R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[0]).z - spawnOrigin.z);
+
+                int x = Mathf.RoundToInt(xFloat / vertexLength);
+                int y = Mathf.RoundToInt(yFloat / vertexLength);
+
+                //Debug.Log("Current Chunk Coord: " + currentChunkCoord + ", World Position Coord: " + transform.position + ", Local Spawn Coord: " + x + "," + y);
 
                 //int x = Xdistance * currentChunkCoordX;
                 //int y = Ydistance * currentChunkCoordY;
-
-                //Debug.Log("Current Local Spawn Coord: " + x + "," + y); 
-
                 //y * R_EndlessTerrain.Instance.chunkSize + x;
                 if (x < R_EndlessTerrain.Instance.chunkSize && y < R_EndlessTerrain.Instance.chunkSize)
-            {
-                Vector3 position = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[y * R_EndlessTerrain.Instance.chunkSize + x]);
+                {
+                    Debug.Log("Within bounds");
+                    Vector3 position = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[y * R_EndlessTerrain.Instance.chunkSize + x]);
 
-                bool canSpawn = false;
-                    if (R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mapData.terrainMap[y * R_EndlessTerrain.Instance.chunkSize + x].SpawnElements)
+                    bool canSpawn = false;
+                    
+                    Debug.Log(R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mapData.terrainMap[y * R_EndlessTerrain.Instance.chunkSize + x].name + "was found");
+                    foreach (Element e in R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mapData.terrainMap[y * R_EndlessTerrain.Instance.chunkSize + x].Elements)
                     {
-                        foreach (Element e in R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mapData.terrainMap[y * R_EndlessTerrain.Instance.chunkSize + 2 + x].Elements)
-                        {
-                            if (e.name == element.name) { canSpawn = true; }
-                        }
+                        if (e.name == element.name) { canSpawn = true; }
                     }
                     if (element != null && canSpawn)
                     {
@@ -113,7 +118,7 @@ public class R_ElementClass : MonoBehaviour
 
                         GameObject newElement = Instantiate(element.prefab);
                         newElement.transform.SetParent(R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform);
-                        newElement.transform.position = position + offset;
+                        newElement.transform.position = position;
                         newElement.transform.eulerAngles = rotation;
                         newElement.transform.localScale = scale;
 
@@ -127,6 +132,14 @@ public class R_ElementClass : MonoBehaviour
                         {
                             newElement.transform.position = new Vector3(newElement.transform.position.x, 0, newElement.transform.position.z);
                         }
+                    }
+                    else if(element == null)
+                    {
+                        Debug.Log("Element was null");
+                    }
+                    else if(canSpawn == false)
+                    {
+                        Debug.Log("canSpawn was false");
                     }
                 }
                 else
