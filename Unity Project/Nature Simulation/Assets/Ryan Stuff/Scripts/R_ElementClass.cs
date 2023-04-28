@@ -95,8 +95,6 @@ public class Element
     public float ScaleOffsetMin = 0.5f;
 
     [Range(0,100)] public int SpawnWeight = 50;
-    public float minSpawnHeight = 0.4f;
-    public float maxSpawnHeight = 0.6f;
 
     [HideInInspector] public Vector2 meshCoord;
 }

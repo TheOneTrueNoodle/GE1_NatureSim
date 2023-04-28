@@ -35,7 +35,6 @@ public class R_FruitTree : R_ElementClass
             int pos = Random.Range(0, usablePositions.Count);
             GameObject newFruit = Instantiate(FruitPrefab);
 
-
             newFruit.transform.SetParent(gameObject.transform.parent);
             newFruit.GetComponent<R_ElementClass>().element.meshCoord = element.meshCoord;
 
