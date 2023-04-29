@@ -1,18 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class SCR_MonkeyDoNothing : SCR_MonkeyBaseState
 {
-    private NavMeshAgent Agent;
+    
 
-    public override void EnterState(SCR_MonkeyStateManager Monkey, NavMeshAgent agent)
+    public override void EnterState(SCR_MonkeyStateManager Monkey)
     {
         Monkey.righarm.enabled = false;
-        Agent = agent;
-        agent.speed = 0;
-        agent.enabled = false;
         Monkey.rend.material.color = Color.black;
 
 

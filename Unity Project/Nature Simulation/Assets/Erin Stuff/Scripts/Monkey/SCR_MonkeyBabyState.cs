@@ -1,75 +1,71 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+
 
 
 public class SCR_MonkeyBaby : SCR_MonkeyBaseState
 {
-    private NavMeshAgent Agent;
+
     private GameObject Target;
     private Vector3 Pos;
     float T = 0;
+    float N = 0;
+    RaycastHit hit;
 
-    public override void EnterState(SCR_MonkeyStateManager Monkey, NavMeshAgent agent)
+    public override void EnterState(SCR_MonkeyStateManager Monkey)
     {
         Monkey.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        Pos = Monkey.transform.position + new Vector3(Random.Range(-20, 20), 20, Random.Range(-20, 20));
+        Pos = Monkey.transform.position + new Vector3(Random.Range(-20, 20), 100, Random.Range(-20, 20));
+        
+        if(Physics.Raycast(Pos,Vector3.down, out hit, Mathf.Infinity, Monkey.layermask))
+        {
+            Pos = hit.point;
+           
+
+        }
         Monkey.readytomate = false;
         
 
       
-        NavMeshHit Hit;
-        if(NavMesh.SamplePosition(Monkey.transform.position, out Hit, 200f, NavMesh.AllAreas))
-        {
-            Agent = agent;
-            Agent.SetDestination(Pos);
-
-        }
-        else
-        {
-            NavMeshTriangulation Triangles = NavMesh.CalculateTriangulation();
-            int RandomNumber = Random.Range(0, Triangles.vertices.Length);
-
-            NavMeshHit hit;
-            if (NavMesh.SamplePosition(Triangles.vertices[RandomNumber], out hit, 2f, 0))
-            {
-                Agent = agent;
-                Agent.Warp(hit.position);
-                Agent.enabled = true;
-                Agent.SetDestination(Pos);
-            }
-            else
-            {
-                Monkey.transform.gameObject.SetActive(false);   
-                
-                return;
-            }
-        }
-        agent.speed = 2;
         Monkey.righarm.enabled = true;
         T = 0;
 
         Monkey.rend.material.color = Color.white;
-        agent.enabled = true;
-      
 
-      
-       
+
+
+
     }
 
     public override void UpdateState(SCR_MonkeyStateManager Monkey)
     {
+
+
+        N += 0.5f * Time.deltaTime;
+        Pos = Vector3.Slerp(Pos, hit.point, N);
+  
         T += 0.01f * Time.deltaTime;
         Monkey.transform.localScale = Vector3.Lerp(new Vector3(0.1f, 0.1f, 0.1f), new Vector3(1, 1, 1), T);
-        Monkey.HeadAim.transform.position = Pos;
+        
+        Monkey.HeadAim.transform.position = Vector3.Slerp(Monkey.HeadAim.transform.position, hit.point, N);
         Monkey.hunger = 25f;
-        Agent.SetDestination(Pos);
 
-        if (Agent.remainingDistance < 1)
+        if (Vector3.Distance(Monkey.transform.position, Pos) > 5)
+        {
+            Monkey.transform.LookAt(Monkey.HeadAim.transform.position);
+            Monkey.Rb.AddRelativeForce((Vector3.forward * Monkey.Speed)* Time.deltaTime, ForceMode.VelocityChange);
+        }
+        else
         {
 
-            Pos = Monkey.transform.position + new Vector3(Random.Range(-20, 20), 0, Random.Range(-20, 20));
+            Pos = Monkey.transform.position + new Vector3(Random.Range(-20, 20), 200, Random.Range(-20, 20));
+           
+            if (Physics.Raycast(Pos, Vector3.down, out hit, Mathf.Infinity, Monkey.layermask))
+            {
+                N = 0;
+                
+            }
         }
         if(T> 1)
         {

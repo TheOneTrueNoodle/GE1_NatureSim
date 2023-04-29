@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+
 public class SCR_MonkeySearchForFoodState : SCR_MonkeyBaseState
 {
-    private NavMeshAgent Agent;
+ 
     private GameObject Target;
     float T = 0;
     private List<GameObject> Fruit = new List<GameObject>();
 
-    public override void EnterState(SCR_MonkeyStateManager Monkey, NavMeshAgent agent) {
+
+    public override void EnterState(SCR_MonkeyStateManager Monkey) {
 
 
         Fruit.AddRange(GameObject.FindGameObjectsWithTag("Fruit"));
@@ -30,20 +31,18 @@ public class SCR_MonkeySearchForFoodState : SCR_MonkeyBaseState
         }
 
         Fruit.Clear();
-        Agent = agent;
-        agent.speed = 2;
+ 
         Monkey.righarm.enabled = false;
         T = 0;
    
         Monkey.rend.material.color = Color.green;
-       
-        Agent.SetDestination(Target.transform.position);
+
        
 
     }
 
     public override void UpdateState(SCR_MonkeyStateManager Monkey) {
-
+     
         if (Target == null)
         {
             Monkey.SwitchState(Monkey.SearchState);
@@ -53,14 +52,17 @@ public class SCR_MonkeySearchForFoodState : SCR_MonkeyBaseState
 
             Monkey.ArmAim.transform.position = Vector3.Slerp(Monkey.ArmAim.transform.position, Target.transform.position, T);
             Monkey.HeadAim.transform.position = Vector3.Slerp(Monkey.HeadAim.transform.position, Target.transform.position, T);
-            Agent.SetDestination(Target.transform.position);
 
-
-            if (Agent.remainingDistance < 2)
-            {
+        if (Vector3.Distance(Monkey.transform.position, Target.transform.position) > 3)
+        {
+            Monkey.transform.LookAt(Monkey.HeadAim.transform.position);
+            Monkey.Rb.AddRelativeForce((Vector3.forward * Monkey.Speed)* Time.deltaTime, ForceMode.VelocityChange);
+        }
+        else
+        {
                 Target.transform.parent = Monkey.ArmAim.transform;
                 Monkey.SwitchState(Monkey.EatState);
-            }
+        }
        
     }
 

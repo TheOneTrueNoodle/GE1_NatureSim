@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
-using UnityEngine.AI;
 
 public class SCR_MonkeyStateManager : MonoBehaviour
 {
 
     [SerializeField] private GameObject monkey;
     [SerializeField] private TwoBoneIKConstraint Arm;
+    public float Speed;
+    public Rigidbody Rb;
+    public LayerMask layermask;
      public IKFootSolver righarm;
      public GameObject HeadAim, ArmAim,Mouth;
      public float hunger;
@@ -17,7 +19,7 @@ public class SCR_MonkeyStateManager : MonoBehaviour
 
     private Animator Anim;
     private float Hunger;
-    private NavMeshAgent Agent;
+  
 
  
 
@@ -37,6 +39,7 @@ public class SCR_MonkeyStateManager : MonoBehaviour
 
     void Awake()
     {
+        Rb = GetComponent<Rigidbody>();
         Color col = Random.ColorHSV(15/255f, 35/255f, 0.5f, 1f, 0f, 1f);
         rend.materials[1].color =col;
         Renderer[] rends = GetComponentsInChildren<Renderer>();
@@ -44,11 +47,11 @@ public class SCR_MonkeyStateManager : MonoBehaviour
         {
             ChildRend.material.color = col;
         }
-        Agent = gameObject.GetComponent<NavMeshAgent>();
+       
 
         CurrentState = BabyState;
 
-        CurrentState.EnterState(this, Agent);
+        CurrentState.EnterState(this);
     }
 
     // Update is called once per frame
@@ -65,12 +68,13 @@ public class SCR_MonkeyStateManager : MonoBehaviour
     public void SwitchState(SCR_MonkeyBaseState state)
     {
         CurrentState = state;
-        state.EnterState(this, Agent);
+        state.EnterState(this);
     }
 
     public void Die()
     {
-
+        transform.parent = null;
+        Destroy(this.gameObject);
     }
 
     public void Mate()
