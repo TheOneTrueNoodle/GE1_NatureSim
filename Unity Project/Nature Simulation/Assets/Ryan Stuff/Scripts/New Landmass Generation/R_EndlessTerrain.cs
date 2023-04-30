@@ -18,7 +18,6 @@ public class R_EndlessTerrain : MonoBehaviour
 
     public static Vector2 viewerPosition;
     Vector2 viewerPositionOld;
-    public bool firstNavMeshGenerated = false;
     public bool firstMeshReceived = false;
 
 
