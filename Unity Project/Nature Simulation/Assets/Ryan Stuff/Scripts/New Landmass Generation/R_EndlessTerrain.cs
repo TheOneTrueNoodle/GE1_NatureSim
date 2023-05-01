@@ -227,9 +227,11 @@ public class R_EndlessTerrain : MonoBehaviour
                             {
                                 if (Physics.Raycast(meshObject.transform.position + new Vector3(0, 100, 0), Vector3.down, out RaycastHit newhit, Mathf.Infinity, 1 << 6))
                                 {
-                                    
-                                    R_NatureGenerator.Instance.Generate(newhit.transform.GetComponent<R_TerrainReferenceData>().coord);
-                                    generatedElements = true;
+                                    if(newhit.transform.GetComponent<R_TerrainReferenceData>())
+                                    {
+                                        R_NatureGenerator.Instance.Generate(newhit.transform.GetComponent<R_TerrainReferenceData>().coord);
+                                        generatedElements = true;
+                                    }
                                 }
                             }
                         }
