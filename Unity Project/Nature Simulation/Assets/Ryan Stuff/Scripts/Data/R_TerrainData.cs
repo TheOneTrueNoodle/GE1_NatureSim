@@ -10,4 +10,7 @@ public class R_TerrainData : R_UpdatableData
 
     public float meshHeightMultiplier;
     public AnimationCurve meshHeightCurve;
+
+    [Header("Regions")]
+    public TerrainType[] regions;
 }

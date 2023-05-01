@@ -1,0 +1,233 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aa995e5f5e3f82489a762e66bd5691f, type: 3}
+  m_Name: Custom Terrain
+  m_EditorClassIdentifier: 
+  autoUpdate: 1
+  uniformScale: 1
+  useFallOff: 0
+  meshHeightMultiplier: 40
+  meshHeightCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.2109066
+      value: 0.35221747
+      inSlope: 0.062150616
+      outSlope: 0.062150616
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.2374331
+    - serializedVersion: 3
+      time: 0.22249588
+      value: 0.46948603
+      inSlope: 0.300867
+      outSlope: 0.300867
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.18295388
+      outWeight: 0.3040297
+    - serializedVersion: 3
+      time: 0.30565125
+      value: 0.51679
+      inSlope: 0.20189232
+      outSlope: 0.20189232
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.43726203
+      outWeight: 0.7634818
+    - serializedVersion: 3
+      time: 0.42518726
+      value: 0.5301022
+      inSlope: 0.089415446
+      outSlope: 0.089415446
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.15573834
+      outWeight: 0.33766258
+    - serializedVersion: 3
+      time: 0.6088305
+      value: 0.5493705
+      inSlope: 0.09421538
+      outSlope: 0.09421538
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.2384644
+    - serializedVersion: 3
+      time: 0.8514818
+      value: 0.6701789
+      inSlope: 0.5603666
+      outSlope: 0.5603666
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.12257223
+      outWeight: 0.2909695
+    - serializedVersion: 3
+      time: 0.9570853
+      value: 0.74476516
+      inSlope: 1.0930722
+      outSlope: 1.0930722
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.22323962
+      outWeight: 0.21758386
+    - serializedVersion: 3
+      time: 1.4000012
+      value: 1.2196909
+      inSlope: 1.7306
+      outSlope: 1.7306
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.045387264
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  regions:
+  - name: Water Deep
+    height: 0
+    color: {r: 0.2216981, g: 0.36090395, b: 0.8867924, a: 0}
+    SpawnElements: 0
+    chanceForNoElement: 100
+    Elements: []
+  - name: Water Shallow
+    height: 0.15
+    color: {r: 0.2264151, g: 0.3938329, b: 0.9056604, a: 1}
+    SpawnElements: 1
+    chanceForNoElement: 100
+    Elements: []
+  - name: Sand
+    height: 0.25
+    color: {r: 1, g: 0.9871588, b: 0.5801887, a: 0}
+    SpawnElements: 1
+    chanceForNoElement: 77.2
+    Elements:
+    - name: Test Rock
+      prefab: {fileID: 6857363697955395826, guid: 93a3d3d988ebb5e4599ff62f0074c316, type: 3}
+      PositionOffset: 0.3
+      RotationOffset: 5
+      ScaleOffsetMax: 1
+      ScaleOffsetMin: 0.5
+      SpawnWeight: 1
+      meshCoord: {x: 0, y: 0}
+  - name: 'Land 1 '
+    height: 0.35
+    color: {r: 0.21285236, g: 0.6320754, b: 0.14012992, a: 0}
+    SpawnElements: 1
+    chanceForNoElement: 25.7
+    Elements:
+    - name: Test Rock
+      prefab: {fileID: 6857363697955395826, guid: 93a3d3d988ebb5e4599ff62f0074c316, type: 3}
+      PositionOffset: 0.3
+      RotationOffset: 5
+      ScaleOffsetMax: 1
+      ScaleOffsetMin: 0.5
+      SpawnWeight: 26
+      meshCoord: {x: 0, y: 0}
+    - name: Test Tree
+      prefab: {fileID: 1564091978595058869, guid: 0ef77730979b89741a784ebb2d5824c0, type: 3}
+      PositionOffset: 1.5
+      RotationOffset: 5
+      ScaleOffsetMax: 1
+      ScaleOffsetMin: 0.5
+      SpawnWeight: 81
+      meshCoord: {x: 0, y: 0}
+    - name: Test Fruit Tree
+      prefab: {fileID: 780671122100451133, guid: fe695714594ff3f409edfb697e76103a, type: 3}
+      PositionOffset: 1.5
+      RotationOffset: 5
+      ScaleOffsetMax: 1
+      ScaleOffsetMin: 0.5
+      SpawnWeight: 34
+      meshCoord: {x: 0, y: 0}
+    - name: Monkey House
+      prefab: {fileID: 8553385989839475503, guid: fc0d644900a4feb468f93798072b64fa, type: 3}
+      PositionOffset: 1
+      RotationOffset: 0
+      ScaleOffsetMax: 1.2
+      ScaleOffsetMin: 0.8
+      SpawnWeight: 2
+      meshCoord: {x: 0, y: 0}
+  - name: 'Land 2 '
+    height: 0.65
+    color: {r: 0.09714157, g: 0.4811321, b: 0.029503396, a: 0}
+    SpawnElements: 1
+    chanceForNoElement: 18.7
+    Elements:
+    - name: Test Rock
+      prefab: {fileID: 6857363697955395826, guid: 93a3d3d988ebb5e4599ff62f0074c316, type: 3}
+      PositionOffset: 1.5
+      RotationOffset: 5
+      ScaleOffsetMax: 1
+      ScaleOffsetMin: 0.5
+      SpawnWeight: 20
+      meshCoord: {x: 0, y: 0}
+    - name: Test Tree
+      prefab: {fileID: 1564091978595058869, guid: 0ef77730979b89741a784ebb2d5824c0, type: 3}
+      PositionOffset: 1.5
+      RotationOffset: 5
+      ScaleOffsetMax: 1
+      ScaleOffsetMin: 0.5
+      SpawnWeight: 78
+      meshCoord: {x: 0, y: 0}
+    - name: Test Fruit Tree
+      prefab: {fileID: 780671122100451133, guid: fe695714594ff3f409edfb697e76103a, type: 3}
+      PositionOffset: 1.5
+      RotationOffset: 5
+      ScaleOffsetMax: 1
+      ScaleOffsetMin: 0.5
+      SpawnWeight: 44
+      meshCoord: {x: 0, y: 0}
+  - name: Rock
+    height: 0.75
+    color: {r: 0.3490566, g: 0.25800875, b: 0.18276076, a: 0}
+    SpawnElements: 1
+    chanceForNoElement: 50
+    Elements:
+    - name: Test Rock
+      prefab: {fileID: 6857363697955395826, guid: 93a3d3d988ebb5e4599ff62f0074c316, type: 3}
+      PositionOffset: 1
+      RotationOffset: 5
+      ScaleOffsetMax: 1
+      ScaleOffsetMin: 0.5
+      SpawnWeight: 50
+      meshCoord: {x: 0, y: 0}
+  - name: 'Rock 2 '
+    height: 0.85
+    color: {r: 0.1981132, g: 0.1392622, b: 0.09064614, a: 0}
+    SpawnElements: 1
+    chanceForNoElement: 75
+    Elements:
+    - name: Test Rock
+      prefab: {fileID: 6857363697955395826, guid: 93a3d3d988ebb5e4599ff62f0074c316, type: 3}
+      PositionOffset: 1.5
+      RotationOffset: 5
+      ScaleOffsetMax: 1
+      ScaleOffsetMin: 0.5
+      SpawnWeight: 25
+      meshCoord: {x: 0, y: 0}
+  - name: Snow
+    height: 1.2
+    color: {r: 0.9103774, g: 0.98518443, b: 1, a: 0}
+    SpawnElements: 1
+    chanceForNoElement: 90
+    Elements:
+    - name: Test Rock
+      prefab: {fileID: 6857363697955395826, guid: 93a3d3d988ebb5e4599ff62f0074c316, type: 3}
+      PositionOffset: 1.5
+      RotationOffset: 5
+      ScaleOffsetMax: 1
+      ScaleOffsetMin: 0.5
+      SpawnWeight: 10
+      meshCoord: {x: 0, y: 0}
