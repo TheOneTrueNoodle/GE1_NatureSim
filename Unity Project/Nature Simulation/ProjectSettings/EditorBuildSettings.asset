@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Terrain Menu Screen.unity
+    path: Assets/Ryan Stuff/Scenes/Terrain Menu Screen.unity
     guid: 3bca4c9775f63f34bb9379c7bf7d4b63
   - enabled: 1
     path: Assets/Ryan Stuff/Scenes/New Landmass Generation Test Scene.unity

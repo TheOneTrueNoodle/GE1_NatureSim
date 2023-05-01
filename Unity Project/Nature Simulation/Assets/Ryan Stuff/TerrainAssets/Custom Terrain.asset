@@ -159,6 +159,14 @@ MonoBehaviour:
       ScaleOffsetMin: 0.8
       SpawnWeight: 2
       meshCoord: {x: 0, y: 0}
+    - name: Epic Snake
+      prefab: {fileID: 8510904655528464119, guid: ee5cf8d577e6d7b4c939f61ac7b80ede, type: 3}
+      PositionOffset: 1.5
+      RotationOffset: 5
+      ScaleOffsetMax: 1
+      ScaleOffsetMin: 0.5
+      SpawnWeight: 20
+      meshCoord: {x: 0, y: 0}
   - name: 'Land 2 '
     height: 0.65
     color: {r: 0.09714157, g: 0.4811321, b: 0.029503396, a: 0}

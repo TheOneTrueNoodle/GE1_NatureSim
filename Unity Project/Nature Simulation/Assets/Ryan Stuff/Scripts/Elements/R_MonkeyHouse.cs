@@ -32,7 +32,6 @@ public class R_MonkeyHouse : R_ElementClass
             GameObject newMonkey = Instantiate(monkeyPrefab);
 
             newMonkey.transform.SetParent(gameObject.transform);
-            //newMonkey.GetComponent<R_ElementClass>().element.meshCoord = element.meshCoord;
 
             if (Physics.Raycast(position + new Vector3(0, 100, 0), Vector3.down, out RaycastHit newhit, Mathf.Infinity, 1 << 6))
             {
