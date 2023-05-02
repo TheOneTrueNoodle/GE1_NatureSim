@@ -33,6 +33,9 @@ Erins work goes here
 
 # List of classes/assets
 
-| Class/asset | Source |
+| Class/asset  | Source | Written by |
+| ------------- | ------------- | ------------- |
+| Content Cell  | Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  | Content Cell  |
 
 # References
