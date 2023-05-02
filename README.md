@@ -68,3 +68,4 @@ Erins work goes here
 | R_UpdateSliderDisplayValue | Self written | Ryan O'Connor |
 
 # References
+- A wonderful series on procedural terrain generation by [Sebastian Lague](https://www.youtube.com/playlist?list=PLFt_AvWsXl0eBW2EiBtl_sxmDtSgZBxB3) which helped immensely for the terrain generation. 
