@@ -14,6 +14,8 @@ Out project is designed around exploring the emergence of new environments gener
 
 ## Screenshots
 ![image](https://user-images.githubusercontent.com/72693746/235679942-5e1d6824-2f53-414c-ae90-8fa9933b0ff3.png)
+![image](https://user-images.githubusercontent.com/72693746/235680187-0f00855a-012f-41d6-ba9f-d773b8700b13.png)
+
 
 
 # Instructions
