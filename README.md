@@ -24,9 +24,15 @@ Fork and clone this repo to your computer to get access to the full project. The
 ## Terrain Generation
 The Terrain Generation is a complex system spread across mulitple different scripts. The majority of the scripts directly involved in the terrain generation process is in the folder "Assets/Ryan Stuff/Scripts/New Landmass Generation" and there are some other scripts in the scripts folder that handles the element spawning. 
 
+There are 2 major scripts that handle the Terrain generation. The R_EndlessTerrain script which procedurally generates the terrain infinitely and keeps track of all of the terrain meshes, and the R_MapGenerator script, which references several other static classes to generate each individual mesh used. If it was left simple like this however, it would have some major performance issues. These two scripts utilise multithreading to create a seperate thread for each meshes generation to keep the generation code off the main thread as it uses a lot of for loops to go through every vertice in each mesh and assign it the proper values. The R_MapGenerator Script references a number of scriptable objects which hold the data for the perlin noise generated and the terrain generation settings. 
+
+In order to properly spawn the objects, I developed the R_NatureGenerator Script. This script has a function that is called by the R_EndlessTerrain script to assign new Elements, a custom data variable setup in the R_ElementClass script that holds the necessary information on each element, to each vertex on the mesh within set distances. It then uses random number generation and weighting to see whether something will actually spawn and what object will spawn. Before it runs it checks the specific mesh coordinate to see what type of TerrainType variable it is which then sees if this type of element can spawn at this location. This stops trees from spawning in the ocean and allows only rocks to spawn in the mountains.
+
 ## Creature AI
+Erins work goes here
 
 # List of classes/assets
 
+| Class/asset | Source |
 
 # References
