@@ -66,24 +66,25 @@ Erins work goes here
 | R_UpdatableData | Modified from this series [Sebastian Lague](https://www.youtube.com/playlist?list=PLFt_AvWsXl0eBW2EiBtl_sxmDtSgZBxB3)  | Ryan O'Connor |
 | R_UpdatableDataEditor | Modified from this series [Sebastian Lague](https://www.youtube.com/playlist?list=PLFt_AvWsXl0eBW2EiBtl_sxmDtSgZBxB3) | Ryan O'Connor |
 | R_UpdateSliderDisplayValue | Self written | Ryan O'Connor |
-| SCR_MONKEY | aaaa | Erin Cooley |
-| SCR_MonkeyAfraidState | aaaa | Erin Cooley |
-| SCR_MonkeyBabyState | aaaa | Erin Cooley |
-| SCR_MonkeyBaseState | aaaa | Erin Cooley |
-| SCR_MonkeyDoNothing | aaaa | Erin Cooley |
-| SCR_MonkeyEatState | aaaa | Erin Cooley |
-| SCR_MonkeyMateState | aaaa | Erin Cooley |
-| SCR_MonkeySearchForFoodState | aaaa | Erin Cooley |
-| SCR_MonkeyStateManager | aaaa | Erin Cooley |
-| SCR_MonkeyWanderState | aaaa | Erin Cooley |
-| SCR_SnakeBaseState | aaaa | Erin Cooley |
-| SCR_SnakeConsomueState | aaaa | Erin Cooley |
-| SCR_SnakeEatState | aaaa | Erin Cooley |
-| SCR_SnakeSeed | aaaa | Erin Cooley |
-| SCR_SnakeStateManager | aaaa | Erin Cooley |
-| SCR_SnakeWaitState | aaaa | Erin Cooley |
-| SCR_Spectator | aaaa | Erin Cooley |
-| MonkeyHead | aaaa | Erin Cooley |
+| SCR_MONKEY | Self Written | Erin Cooley |
+| SCR_MonkeyAfraidState | Self Written | Erin Cooley |
+| SCR_MonkeyBabyState | Self Written | Erin Cooley |
+| SCR_MonkeyBaseState | Self Written | Erin Cooley |
+| SCR_MonkeyDoNothing | Self Written | Erin Cooley |
+| SCR_MonkeyEatState | Self Written | Erin Cooley |
+| SCR_MonkeyMateState | Self Written | Erin Cooley |
+| SCR_MonkeySearchForFoodState | Self Written | Erin Cooley |
+| SCR_MonkeyStateManager | Self Written | Erin Cooley |
+| SCR_MonkeyWanderState | Self Written | Erin Cooley |
+| SCR_SnakeBaseState | Self Written | Erin Cooley |
+| SCR_SnakeConsomueState | Self Written | Erin Cooley |
+| SCR_SnakeEatState | Self Written | Erin Cooley |
+| SCR_SnakeSeed | Self Written | Erin Cooley |
+| SCR_SnakeStateManager | Self Written | Erin Cooley |
+| SCR_SnakeWaitState | Self Written | Erin Cooley |
+| SCR_Spectator | Self Written | Erin Cooley |
+| MonkeyHead | Blender Base Mesh | Erin Cooley |
+| IkFootSolver | Modified From Unity Official Procedural Animation Project | Erin Cooley |
 
 
 # References
