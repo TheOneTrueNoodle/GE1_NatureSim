@@ -8248,17 +8248,18 @@ MonoBehaviour:
   element:
     name: Fruit Tree
     prefab: {fileID: 780671122100451133}
-    elementPositionOffset: 1
-    elementRotationOffset: 5
-    elementScaleOffsetMax: 1
-    elementScaleOffsetMin: 0.5
-    ElementSpawnWeight: 1
+    PositionOffset: 1
+    RotationOffset: 5
+    ScaleOffsetMax: 1
+    ScaleOffsetMin: 0.5
+    SpawnWeight: 50
+    meshCoord: {x: 0, y: 0}
   Grows: 1
   Dies: 1
   MaxLifetime: 240
   MinLifetime: 120
   GrowSpeed: 1
-  ChanceForNewElement: 25
+  ChanceForNewElement: 52
   scale: {x: 1, y: 1, z: 1}
   Grown: 0
   FruitSpawnPositions:
@@ -8268,8 +8269,8 @@ MonoBehaviour:
   - {fileID: 780671121952161813}
   - {fileID: 780671122466858625}
   - {fileID: 780671121632353612}
-  MaxTime: 60
-  MinTime: 15
+  MaxTime: 20
+  MinTime: 5
   FruitPrefab: {fileID: 4459153557537905465, guid: 367b0137980321445b54088be20f3b01, type: 3}
   MaxFruitsSpawned: 4
 --- !u!1 &780671122176449859

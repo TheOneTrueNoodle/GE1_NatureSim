@@ -190,7 +190,7 @@ public class R_NatureGenerator : MonoBehaviour
                             }
                         }
                         Mesh mesh = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].mesh;
-                        Vector3 position = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[y * chunkSize-1 + x]);
+                        Vector3 position = R_EndlessTerrain.Instance.terrainChunkDictionary[currentChunkCoord].meshObject.transform.TransformPoint(mesh.vertices[y * chunkSize + x]);
                         //element.meshPosition = y * R_EndlessTerrain.Instance.chunkSize + x;
 
                         //Spawning time

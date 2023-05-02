@@ -123,9 +123,9 @@ MonoBehaviour:
       meshCoord: {x: 0, y: 0}
   - name: 'Land 1 '
     height: 0.35
-    color: {r: 0.21285236, g: 0.6320754, b: 0.14012992, a: 0}
+    color: {r: 0.9433962, g: 0.0925596, b: 0.6258178, a: 0}
     SpawnElements: 1
-    chanceForNoElement: 25.7
+    chanceForNoElement: 11.3
     Elements:
     - name: Test Rock
       prefab: {fileID: 6857363697955395826, guid: 93a3d3d988ebb5e4599ff62f0074c316, type: 3}
@@ -141,7 +141,7 @@ MonoBehaviour:
       RotationOffset: 5
       ScaleOffsetMax: 1
       ScaleOffsetMin: 0.5
-      SpawnWeight: 81
+      SpawnWeight: 60
       meshCoord: {x: 0, y: 0}
     - name: Test Fruit Tree
       prefab: {fileID: 780671122100451133, guid: fe695714594ff3f409edfb697e76103a, type: 3}
@@ -149,7 +149,7 @@ MonoBehaviour:
       RotationOffset: 5
       ScaleOffsetMax: 1
       ScaleOffsetMin: 0.5
-      SpawnWeight: 34
+      SpawnWeight: 53
       meshCoord: {x: 0, y: 0}
     - name: Monkey House
       prefab: {fileID: 8553385989839475503, guid: fc0d644900a4feb468f93798072b64fa, type: 3}
@@ -157,15 +157,15 @@ MonoBehaviour:
       RotationOffset: 0
       ScaleOffsetMax: 1.2
       ScaleOffsetMin: 0.8
-      SpawnWeight: 5
+      SpawnWeight: 18
       meshCoord: {x: 0, y: 0}
     - name: Epic Snake
       prefab: {fileID: 8510904655528464119, guid: ee5cf8d577e6d7b4c939f61ac7b80ede, type: 3}
-      PositionOffset: 1.5
-      RotationOffset: 5
-      ScaleOffsetMax: 1
-      ScaleOffsetMin: 0.5
-      SpawnWeight: 20
+      PositionOffset: 1
+      RotationOffset: 0
+      ScaleOffsetMax: 1.2
+      ScaleOffsetMin: 0.8
+      SpawnWeight: 19
       meshCoord: {x: 0, y: 0}
   - name: 'Land 2 '
     height: 0.65

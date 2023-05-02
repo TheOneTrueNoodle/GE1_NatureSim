@@ -2878,7 +2878,7 @@ MonoBehaviour:
   HeadAim: {fileID: 318380906697623002}
   Target: {fileID: 0}
   SnakeSeed: {fileID: 8510904655528464119, guid: ee5cf8d577e6d7b4c939f61ac7b80ede, type: 3}
-  hunger: 20
+  hunger: 100
 --- !u!135 &318380905661098992
 SphereCollider:
   m_ObjectHideFlags: 0

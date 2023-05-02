@@ -97,7 +97,14 @@ public class R_LoadGenerationSceneManager : MonoBehaviour
 
         if(usingCustomNoise)
         {
-            customNoiseData.seed = int.Parse(Seed.text);
+            if(Seed.text != "")
+            {
+                customNoiseData.seed = int.Parse(Seed.text);
+            }
+            else
+            {
+                customNoiseData.seed = seed;
+            }
             customNoiseData.noiseScale = NoiseScale.value;
             customNoiseData.octaves = (int)Octaves.value;
             customNoiseData.persistance = Persistance.value;

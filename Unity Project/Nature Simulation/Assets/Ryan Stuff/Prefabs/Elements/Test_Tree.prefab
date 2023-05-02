@@ -456,15 +456,13 @@ MonoBehaviour:
     ScaleOffsetMax: 1
     ScaleOffsetMin: 0.5
     SpawnWeight: 50
-    minSpawnHeight: 0.4
-    maxSpawnHeight: 0.6
-    meshSpawnedPosition: 0
+    meshCoord: {x: 0, y: 0}
   Grows: 1
   Dies: 1
-  MaxLifetime: 2
-  MinLifetime: 1
+  MaxLifetime: 300
+  MinLifetime: 90
   GrowSpeed: 0.5
-  ChanceForNewElement: 100
+  ChanceForNewElement: 71
   scale: {x: 1, y: 1, z: 1}
   Grown: 0
 --- !u!1 &1564091978650781860
