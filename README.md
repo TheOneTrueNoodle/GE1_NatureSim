@@ -10,7 +10,7 @@ C20517416
 Out project is designed around exploring the emergence of new environments generated from procedural generation, and how those environments can spread and grow. By combining simple behaviours with AI and state machines for the natural environment, we have attempted to simulate an infinite world that can changes based on the input of variables that affect terrain generation. 
 
 ## Video
-!https://youtu.be/zlIDZ-ISafg
+https://youtu.be/zlIDZ-ISafg
 
 ## Screenshots
 ![image](https://user-images.githubusercontent.com/72693746/235679942-5e1d6824-2f53-414c-ae90-8fa9933b0ff3.png)
