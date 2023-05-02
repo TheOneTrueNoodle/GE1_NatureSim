@@ -29,7 +29,15 @@ There are 2 major scripts that handle the Terrain generation. The R_EndlessTerra
 In order to properly spawn the objects, I developed the R_NatureGenerator Script. This script has a function that is called by the R_EndlessTerrain script to assign new Elements, a custom data variable setup in the R_ElementClass script that holds the necessary information on each element, to each vertex on the mesh within set distances. It then uses random number generation and weighting to see whether something will actually spawn and what object will spawn. Before it runs it checks the specific mesh coordinate to see what type of TerrainType variable it is which then sees if this type of element can spawn at this location. This stops trees from spawning in the ocean and allows only rocks to spawn in the mountains.
 
 ## Creature AI
-Erins work goes here
+For the creatures I wanted to bring them to life by rigging them with procedural animation, Using the animation rigging package allows for the monkey arms to use inverse kinematics and allows me to procedurally animate the monkey walk cycle using the IK foot solver script.
+
+The Snake/Tower is quite simplistic compared to the monkeys, it mimics a regular tree, however if a monkey gets too close it will attempt to grab the monkey. once the monkey is grabbed the tree will bring the monkey to the very top of itself for consumption. once consumption has taken place the snake/tower will use the energy gained from the monkey to spread out its seeds and extend its life cycle. I wanted to base the Snake/Towers off lobsters so they do not age and simply die when starving.
+
+The monkeys are much more advanced than the Snake/Tower with multiple states that also dictate their life cycle. In the beginning monkeys will appear as babies and learn to walk as they grow, visually getting much better at walking as late teens to adults. Once they reach adult-hood they have no time to waste and will  instantly attempt to find food in the "search for food state", if no food is available they will enter a wander to try and conserve hunger and enter an area with more food. If they find food however they will sit there and consume it, moving their arms to their mouth with the food. 
+
+once they have enough energy stored they will find the closest monkey and attempt to mate (there were issues with monkeys mating with baby monkeys, this has been hard coded not to happen because that's gross) if the other monkey does not want to mate it will reject the first monkey, the first monkey will then enter a wander state to leave the second monkey alone. If BOTH monkeys decide to mate they have a chance to create offspring (25% - 0 50% - 1 25% - 2) and then will enter a wander state as they give their baby room to grow.
+
+Due to the monkeys eating fruit and reproducing and snake/towers eating the monkeys the ecosystem will balance itself out, too many snakes and they'll have no more monkeys to eat, too many monkeys and there will be either no food left or the snake towers will start appearing and quickly explode in population
 
 # List of classes/assets
 
