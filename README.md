@@ -35,7 +35,36 @@ Erins work goes here
 
 | Class/asset  | Source | Written by |
 | ------------- | ------------- | ------------- |
-| Content Cell  | Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  | Content Cell  |
+| R_ElementBaseState  | Self written | Ryan O'Connor  |
+| R_ElementClass | Self written | Ryan O'Connor   |
+| R_ElementDyingState  | Self written | Ryan O'Connor  |
+| R_ElementGrowingState | Self written  | Ryan O'Connor  |
+| R_ElementLivingState  | Self written  | Ryan O'Connor  |
+| R_ElementNullState | Self written | Ryan O'Connor   |
+| R_EndlessTerrain  | Modified from this series [Sebastian Lague](https://www.youtube.com/playlist?list=PLFt_AvWsXl0eBW2EiBtl_sxmDtSgZBxB3)| Ryan O'Connor  |
+| R_EternalRotation  | Self written | Ryan O'Connor   |
+| R_FallOffGenerator  | Modified from this series [Sebastian Lague](https://www.youtube.com/playlist?list=PLFt_AvWsXl0eBW2EiBtl_sxmDtSgZBxB3) | Ryan O'Connor   |
+| R_Fruit  | Self written | Ryan O'Connor   |
+| R_FruitTree  | Self written | Ryan O'Connor   |
+| R_HideOnPlay  | Self written | Ryan O'Connor  |
+| R_LandmassNoise  | Modified from this series [Sebastian Lague](https://www.youtube.com/playlist?list=PLFt_AvWsXl0eBW2EiBtl_sxmDtSgZBxB3)  | Ryan O'Connor  |
+| R_LoadGenerationSceneManager | Self written | Ryan O'Connor  |
+| R_MainMenuVisualGenerator  | Self written | Ryan O'Connor |
+| R_ManageMonkeysState | Self written | Ryan O'Connor |
+| R_MapDisplay  | Modified from this series [Sebastian Lague](https://www.youtube.com/playlist?list=PLFt_AvWsXl0eBW2EiBtl_sxmDtSgZBxB3)  | Ryan O'Connor |
+| R_MapGenerator  | Modified from this series [Sebastian Lague](https://www.youtube.com/playlist?list=PLFt_AvWsXl0eBW2EiBtl_sxmDtSgZBxB3) | Ryan O'Connor |
+| R_MapGeneratorEditor | Modified from this series [Sebastian Lague](https://www.youtube.com/playlist?list=PLFt_AvWsXl0eBW2EiBtl_sxmDtSgZBxB3)  | Ryan O'Connor |
+| R_MeshGenerator  | Modified from this series [Sebastian Lague](https://www.youtube.com/playlist?list=PLFt_AvWsXl0eBW2EiBtl_sxmDtSgZBxB3)  | Ryan O'Connor |
+| R_MonkeyHouse | Self written | Ryan O'Connor |
+| R_NatureGenerator  | Self written | Ryan O'Connor |
+| R_NoiseData  | Modified from this series [Sebastian Lague](https://www.youtube.com/playlist?list=PLFt_AvWsXl0eBW2EiBtl_sxmDtSgZBxB3) | Ryan O'Connor |
+| R_Rock  | Self written | Ryan O'Connor |
+| R_TerrainData  | Modified from this series [Sebastian Lague](https://www.youtube.com/playlist?list=PLFt_AvWsXl0eBW2EiBtl_sxmDtSgZBxB3)  | Ryan O'Connor |
+| R_TerrainReferenceData  | Self written | Ryan O'Connor |
+| R_TextureGenerator | Modified from this series [Sebastian Lague](https://www.youtube.com/playlist?list=PLFt_AvWsXl0eBW2EiBtl_sxmDtSgZBxB3)  | Ryan O'Connor |
+| R_Tree | Self written | Ryan O'Connor |
+| R_UpdatableData | Modified from this series [Sebastian Lague](https://www.youtube.com/playlist?list=PLFt_AvWsXl0eBW2EiBtl_sxmDtSgZBxB3)  | Ryan O'Connor |
+| R_UpdatableDataEditor | Modified from this series [Sebastian Lague](https://www.youtube.com/playlist?list=PLFt_AvWsXl0eBW2EiBtl_sxmDtSgZBxB3) | Ryan O'Connor |
+| R_UpdateSliderDisplayValue | Self written | Ryan O'Connor |
 
 # References
